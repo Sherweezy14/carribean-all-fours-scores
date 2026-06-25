@@ -27,7 +27,7 @@ export default function Navbar() {
     <nav className="flex bg-[#f8fafc] border-b border-slate-200 justify-between items-center min-w-xl   h-20 md:h-24  lg:h-24 border-1">
       <div className="text-3xl  pl-2 md:text-4xl md:m-2 lg:hidden">☰</div>
 
-      <div className="border-1 flex items-center">
+      <div className="border-1 flex items-center lg:pl-2 ">
         <div>
           <img className="h-20 md:h-24 lg:h-24" src={logo} alt="" />
         </div>
