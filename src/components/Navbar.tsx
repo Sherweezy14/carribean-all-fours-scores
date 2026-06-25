@@ -9,67 +9,57 @@ import {
   Users,
   Layers,
   ShieldAlert,
+  BellRing,
 } from "lucide-react";
+import { NativeBuffer } from "mongoose";
 
 export default function Navbar() {
+  const navLinks = [
+    { name: "live", link: "/", icon: Radio },
+    { name: "schedule", link: "/", icon: Calendar },
+    { name: "rankings", link: "/", icon: Trophy },
+    { name: "teams", link: "/", icon: Users },
+    { name: "divisions", link: "/", icon: Layers },
+    { name: "about", link: "/", icon: ShieldAlert },
+  ];
+
   return (
-    <nav className="flex bg-[#f8fafc] border-b border-slate-200 justify-between items-center min-w-xl pl-5  h-36 border-1">
-      {/* Floating cards over nav */}
-      <div className="absolute top-0 right-0 w-40 h-36 overflow-hidden"></div>
-      {/* Floating cards over nav */}
+    <nav className="flex bg-[#f8fafc] border-b border-slate-200 justify-between items-center min-w-xl   h-20 md:h-24  lg:h-24 border-1">
+      <div className="text-3xl  pl-2 md:text-4xl md:m-2 lg:hidden">☰</div>
 
       <div className="border-1 flex items-center">
         <div>
-          <img className="h-40" src={logo} alt="" />
+          <img className="h-20 md:h-24 lg:h-24" src={logo} alt="" />
         </div>
-        <div className="flex-col pl-5 gap-2">
-          <p className="font-display text-7xl tracking-[0.05em] text-[#071b3a]">
+        <div className="flex-col px-2 gap-2">
+          <p className="font-display text-4xl tracking-[0.081em] md:text-5xl  text-[#071b3a]">
             ALL FOURS
           </p>
-          <p className="font-display text-2xl tracking-[0.111em] -mt-2 text-red-700">
+          <p className="font-display text-md tracking-[0.021em] md:tracking-[0.041em] md:text-xl -mt-2 text-red-700">
             ROUND ROBIN TOURNAMENT
           </p>
         </div>
       </div>
-      <div className="hidden lg:flex items-center divide-x divide-slate-300 mt-7">
-        <div className="group flex flex-col items-center px-8 cursor-pointer">
-          <Radio
-            size={30}
-            className="
-      text-slate-800
-      transition-all
-      duration-200
-      group-hover:text-[#b11226]
-    "
-          />
-          <p
-            className="
-      text-base
-      transition-all
-      duration-200
-      border-b-2
-      border-transparent
-      group-hover:border-[#b11226]
-      group-hover:text-[#b11226]
-    "
-          >
-            LIVE
-          </p>
-        </div>
-        <div className="group flex flex-col items-center px-8 cursor-pointer">
-          <Calendar
-            size={30}
-            className="
-      text-slate-800
-      transition-all
-      duration-200
-      group-hover:text-[#b11226]
-    "
-            strokeWidth={1.5}
-          />
-          <p
-            className="
-      text-base
+      <div className=" hidden lg:flex items-center divide-x divide-slate-300 mt-2 md:mt-4">
+        {navLinks.map((link) => {
+          const Icon = link.icon;
+          return (
+            <div
+              key={link.name}
+              className="group flex flex-col items-center px-3 md:px-4 lg:px-6 cursor-pointer"
+            >
+              <Icon
+                size={26}
+                className="
+text-slate-800
+transition-all
+duration-200
+group-hover:text-[#b11226]
+"
+              />
+              <p
+                className="
+      text-sm
       transition-all
       duration-200
       border-b-2
@@ -77,115 +67,23 @@ export default function Navbar() {
       group-hover:border-[#b11226]
       group-hover:text-[#b11226]
     "
-          >
-            SCHEDULE
-          </p>
-        </div>
-        <div className="group flex flex-col items-center px-8 cursor-pointer">
-          <Trophy
-            size={30}
-            className="
-      text-slate-800
-      transition-all
-      duration-200
-      group-hover:text-[#b11226]
-    "
-          />
-          <p
-            className="
-      text-base
-      transition-all
-      duration-200
-      border-b-2
-      border-transparent
-      group-hover:border-[#b11226]
-      group-hover:text-[#b11226]
-    "
-          >
-            RANKINGS
-          </p>
-        </div>
-        <div className="group flex flex-col items-center px-8 cursor-pointer">
-          <Users
-            size={30}
-            className="
-      text-slate-800
-      transition-all
-      duration-200
-      group-hover:text-[#b11226]
-    "
-          />
-          <p
-            className="
-      text-base
-      transition-all
-      duration-200
-      border-b-2
-      border-transparent
-      group-hover:border-[#b11226]
-      group-hover:text-[#b11226]
-    "
-          >
-            TEAMS
-          </p>
-        </div>
-        <div className="group flex flex-col items-center px-8 cursor-pointer">
-          <Layers
-            size={30}
-            className="
-      text-slate-800
-      transition-all
-      duration-200
-      group-hover:text-[#b11226]
-    "
-          />
-          <p
-            className="
-      text-base
-      transition-all
-      duration-200
-      border-b-2
-      border-transparent
-      group-hover:border-[#b11226]
-      group-hover:text-[#b11226]
-    "
-          >
-            DIVISIONS
-          </p>
-        </div>
-        <div className="group flex flex-col items-center px-8 cursor-pointer">
-          <ShieldAlert
-            size={30}
-            className="
-      text-slate-800
-      transition-all
-      duration-200
-      group-hover:text-[#b11226]
-    "
-          />
-          <p
-            className="
-      text-base
-      transition-all
-      duration-200
-      border-b-2
-      border-transparent
-      group-hover:border-[#b11226]
-      group-hover:text-[#b11226]
-    "
-          >
-            ABOUT
-          </p>
-        </div>
+              >
+                {link.name.toUpperCase()}
+              </p>
+            </div>
+          );
+        })}
+
         <div></div>
       </div>
-      <div className="h-36 w-48">
+      <div className=" px-5  md:h-24  md:px-0 ">
         <img
           src={cards}
           alt=""
-          className="w-full
+          className="hidden w-full h-full md:block
     "
         />
+        <BellRing size="22" className="hover:text-red-600 md:hidden"/>
       </div>
     </nav>
   );
