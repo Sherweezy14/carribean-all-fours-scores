@@ -4,12 +4,14 @@ import "./App.css";
 import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import QuickNav from "./components/Quicknav";
+import NewHome from "./components/Newhome";
 
 function App() {
   return (
     <>
       <Navbar />
       <QuickNav />
+      <NewHome />
     </>
   );
 }
