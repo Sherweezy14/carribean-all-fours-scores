@@ -59,7 +59,8 @@ group-hover:text-[#b11226]
               />
               <p
                 className="
-      text-sm
+      text-xl
+      tracking-wider
       transition-all
       duration-200
       border-b-2

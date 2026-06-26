@@ -25,7 +25,7 @@ export default function QuickNav(){
             hover:-translate-y-1
             transition-all
             duration-200
-            cursor-pointer  hover:text-white hover:bg-red-500 flex flex-col bg-[#f8fafc] items-center justify-center h-16 rounded-md shadow-sm border-gray-100 border-2 md:h-20">
+            cursor-pointer  hover:text-white hover:bg-red-700 flex flex-col bg-[#f8fafc] items-center justify-center h-16 rounded-md shadow-sm border-gray-100 border-2 md:h-20">
             <link.icon className=" mb-1"/>
             <p className="text-xs">{link.name}</p>
             </div>)
