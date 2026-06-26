@@ -6,10 +6,12 @@ import Navbar from "./components/Navbar";
 import QuickNav from "./components/Quicknav";
 import NewHome from "./components/Newhome";
 import Footer from "./components/Footer";
+import { setup } from "./util/TornamentSetUp";
 
 function App() {
+  console.log("this is what tournament returns", setup());
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <Navbar />
       <QuickNav />
       <NewHome />
