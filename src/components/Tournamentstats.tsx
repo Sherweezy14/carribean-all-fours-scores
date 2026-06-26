@@ -11,17 +11,17 @@ export default function TournamentStats(){
                 <div className="flex flex-col items-center">
                     <Target size={48} className="text-red-700"/>
                     <p className="text-2xl">Bullseyes</p>
-                    <p className="text-xl">142</p>
+                    <p className="text-6xl">142</p>
                 </div>
                 <div className="flex flex-col items-center">
-                    <Gamepad size={48} className="text-yellow-400" />
+                    <Spade size={48} className="text-yellow-400" />
                     <p className="text-2xl">Hangjacks</p>
-                    <p className="text-xl">97</p>
+                    <p className="text-6xl">97</p>
                 </div>
                 <div className="flex flex-col items-center">
-                    <Spade size={48} className="text-blue-950" />
+                    <Gamepad size={48} className="text-blue-950" />
                     <p className="text-2xl">Games played</p>
-                    <p className="text-xl">34</p>
+                    <p className="text-6xl">34</p>
                 </div>
             </div>
         </section>
