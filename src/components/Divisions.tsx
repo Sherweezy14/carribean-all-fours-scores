@@ -15,7 +15,7 @@ import {
   GridToolbarContainer,
   GridToolbarExport,
 } from "@mui/x-data-grid";
-import { Tournament } from "../util/allFoursGame2025";
+import { Tournament } from "../models/Tournament";
 
 function CustomToolbar() {
   return (

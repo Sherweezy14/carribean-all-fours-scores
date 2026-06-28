@@ -8,7 +8,7 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import ViewDayIcon from "@mui/icons-material/ViewDay";
 import Divisions from "./Divisions";
 import Games from "./Games";
-import { setup } from "../util/allFoursGame2025";
+import { setup } from "../util/TornamentSetUp";
 
 const styles: { [key: string]: CSSProperties } = {
   root: {

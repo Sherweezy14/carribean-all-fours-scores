@@ -7,7 +7,10 @@ import MuiAccordionSummary, {
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import { Typography, Paper, Box, Button, Divider } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
-import { Tournament, Game, Buy } from "../util/allFoursGame2025";
+import { Tournament } from "../models/Tournament";
+import { Game } from "../models/Game";
+import { Round } from "../types/Round";
+import { Buy } from "../models/Buy";
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion {...props} />
