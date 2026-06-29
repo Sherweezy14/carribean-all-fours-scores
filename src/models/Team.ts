@@ -6,6 +6,8 @@ export class Team {
   hangJackLosses: number;
   wins: number;
   buys: number;
+  division_id: number;
+  id: number;
 
   constructor(name: string) {
     // Initialize properties here
@@ -16,6 +18,8 @@ export class Team {
     this.hangJackLosses = 0;
     this.wins = 0;
     this.buys = 0;
+    this.division_id = 0;
+    this.id = 0;
   }
 
   public addBullsEyes(won: number, lost: number) {

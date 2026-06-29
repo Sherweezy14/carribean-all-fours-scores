@@ -1,40 +1,57 @@
-import { Users,Clock } from "lucide-react"
-export default function ScoresCard(){
+import { Users, Clock } from "lucide-react";
 
-    return(
-        <div className="flex justify-between col-span-1 md:col-span-2 border-gray-100 shadow-md
-        hover:shadow-xl
-        hover:-translate-y-1
-        transition-all duration-200 border-2 cursor-pointer rounded-md py-1 px-2">
-                            <div className="flex flex-col md:flex-row px-2 py-1 ">
-                                <div className="flex flex-col items-center text-white pr-2">
-                                    <div className="bg-red-500   px-1 py-1 text-xs md:text-sm rounded-md font-bold mb-2">Live Now</div>
-                                    <div className="bg-red-900 px-3 py-3 rounded-full"><Users size={24} strokeWidth={3} /></div>
-                                </div>
-                                <div className="flex flex-col pt-1 text-xs">
-                                    <div className="mb-3 text-red-500  hidden md:block font-semibold">Division A</div>
-                                    <div className="text-md font-bold md:text-xl">Four Play</div>
-                                    <div >Bullseys:  5</div>
-                                    <div>HangJack:  2</div>
-                                </div>
-                            </div>
-                            <div className="flex flex-col justify-center text-center items-center">
-                                <div className="text-xs"><span className="block font-semibold text-red-500 md:hidden"> Division A</span><span className="block md:inline"> Started </span>  7:15 PM</div>
-                                <div className=" font-display text-4xl md:text-7xl ">78-62</div>
-                                <div className="flex justify-center text-sm md:text-md items-center gap-1 font-sm"> <Clock size={12} className=""/>  00:45:32</div>
-                            </div>
-                            <div className="flex flex-col md:flex-row px-2 pt-8 ">
-                              
-                                <div className="flex order-2 md:order-1 flex-col pt-1 text-xs text-end">
-                                    <div className=" font-bold md:text-xl">High Rollers</div>
-                                    <div>Bullseys:  5</div>
-                                    <div>HangJack:  2</div>
-                                </div>
-                                <div className="flex order-1 md:order-2 flex-col items-center text-white px-2 pt-1">
-                                    <div className="bg-yellow-500 px-3 py-3 rounded-full "><Users size={24} strokeWidth={3} /></div>
-                                </div>
-                            </div>
-                        </div>
-                    
-    )
+export default function ScoresCard() {
+  return (
+    <div
+      className="col-span-1 flex cursor-pointer justify-between rounded-md border-2
+        border-gray-100
+        px-2
+        py-1 shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-xl md:col-span-2"
+    >
+      <div className="flex flex-col px-2 py-1 md:flex-row ">
+        <div className="flex flex-col items-center pr-2 text-white">
+          <div className="mb-2   rounded-md bg-red-500 px-1 py-1 text-xs font-bold md:text-sm">
+            Live Now
+          </div>
+          <div className="rounded-full bg-red-900 px-3 py-3">
+            <Users size={24} strokeWidth={3} />
+          </div>
+        </div>
+        <div className="flex flex-col pt-1 text-xs">
+          <div className="mb-3 hidden  font-semibold text-red-500 md:block">
+            Division A
+          </div>
+          <div className="text-md font-bold md:text-xl">Four Play</div>
+          <div>Bullseys: 5</div>
+          <div>HangJack: 2</div>
+        </div>
+      </div>
+      <div className="flex flex-col items-center justify-center text-center">
+        <div className="text-xs">
+          <span className="block font-semibold text-red-500 md:hidden">
+            {" "}
+            Division A
+          </span>
+          <span className="block md:inline"> Started </span> 7:15 PM
+        </div>
+        <div className=" font-display text-4xl md:text-7xl ">78-62</div>
+        <div className="md:text-md font-sm flex items-center justify-center gap-1 text-sm">
+          {" "}
+          <Clock size={12} className="" /> 00:45:32
+        </div>
+      </div>
+      <div className="flex flex-col px-2 pt-8 md:flex-row ">
+        <div className="order-2 flex flex-col pt-1 text-end text-xs md:order-1">
+          <div className=" font-bold md:text-xl">High Rollers</div>
+          <div>Bullseys: 5</div>
+          <div>HangJack: 2</div>
+        </div>
+        <div className="order-1 flex flex-col items-center px-2 pt-1 text-white md:order-2">
+          <div className="rounded-full bg-yellow-500 px-3 py-3 ">
+            <Users size={24} strokeWidth={3} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

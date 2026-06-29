@@ -8,7 +8,35 @@ import {
   RotateCcw,
   MoveRight,
 } from "lucide-react";
+import { Team } from "../models/Team";
+import { supabase } from "../Supbase-Client";
+import { useState, useEffect } from "react";
+
 export default function GameForm() {
+  const [teams, setTeams] = useState<Team[]>([]);
+  const [search1, setSearch1] = useState("");
+  const [search2, setSearch2] = useState("");
+  const [team1Open, setTeam1Open] = useState(false);
+  const [team2Open, setTeam2Open] = useState(false);
+
+  async function getTeams() {
+    const { data, error } = await supabase.from("Teams").select("*");
+    setTeams(data ?? []);
+  }
+
+  function handleOnChange(e: any) {
+    if (e.target.name === "team2") {
+      setSearch2(e.target.value);
+      setTeam2Open(true);
+    } else {
+      setSearch1(e.target.value);
+      setTeam1Open(true);
+    }
+  }
+
+  useEffect(() => {
+    getTeams();
+  }, []);
   return (
     <section className="grid grid-cols-1 p-3 md:grid-cols-2">
       <div className="flex flex-row justify-between pl-2 md:col-span-2">
@@ -42,11 +70,35 @@ export default function GameForm() {
             <div className="pl-1 font-bold"> Losing Team</div>
           </div>
           <div className="my-3 ">
-            <input
-              type="text"
-              className="h-12 w-full rounded-lg border-2 border-gray-100"
-              placeholder=" Select Team"
-            />
+            <div className="relative">
+              <input
+                type="text"
+                onChange={handleOnChange}
+                value={search1}
+                name="team1"
+                className="h-12 w-full rounded-lg border-2 border-gray-100"
+                placeholder=" Select Team"
+              />
+              {search1 && team1Open && (
+                <div className="absolute z-20 mt-2 max-h-60 w-full overflow-y-auto rounded-lg border border-slate-200 bg-white shadow-lg">
+                  {teams
+                    .filter((team: Team) =>
+                      team.name.toLowerCase().includes(search1.toLowerCase()),
+                    )
+                    .map((team: Team) => (
+                      <div
+                        onClick={() => {
+                          setSearch1(team.name);
+                          setTeam1Open(false);
+                        }}
+                        key={team.id}
+                      >
+                        {team.name}
+                      </div>
+                    ))}
+                </div>
+              )}
+            </div>
           </div>
           <div className="flex">
             <Target
@@ -105,14 +157,38 @@ export default function GameForm() {
               size={40}
               className="rounded-full bg-green-50 p-2 text-green-700"
             />
-            <div className="pl-1 font-bold"> Losing Team</div>
+            <div className="pl-1 font-bold"> sherwyn Team</div>
           </div>
           <div className="my-3 ">
-            <input
-              type="text"
-              className="h-12 w-full rounded-lg border-2 border-gray-100"
-              placeholder=" Select Team"
-            />
+            <div className="relative">
+              <input
+                type="text"
+                onChange={handleOnChange}
+                value={search2}
+                name="team2"
+                className="h-12 w-full rounded-lg border-2 border-gray-100"
+                placeholder=" Select Team"
+              />
+              {search2 && team2Open && (
+                <div className="absolute z-20 mt-2 max-h-60 w-full overflow-y-auto rounded-lg border border-slate-200 bg-white shadow-lg">
+                  {teams
+                    .filter((team: Team) =>
+                      team.name.toLowerCase().includes(search2.toLowerCase()),
+                    )
+                    .map((team: Team) => (
+                      <div
+                        onClick={() => {
+                          setSearch2(team.name);
+                          setTeam2Open(false);
+                        }}
+                        key={team.id}
+                      >
+                        {team.name}
+                      </div>
+                    ))}
+                </div>
+              )}
+            </div>
           </div>
           <div className="flex">
             <Target
