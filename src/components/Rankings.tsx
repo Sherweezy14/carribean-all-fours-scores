@@ -1,4 +1,18 @@
+import { supabase } from "../Supbase-Client";
+import { useEffect, useState } from "react";
+import { RankingsRow } from "../types/RankingsRow";
+
 export default function Rankings() {
+  const [rankings, setRankings] = useState<RankingsRow[]>([]);
+
+  async function getRankings() {
+    const { data } = await supabase.from("rankings").select("*");
+    setRankings(data ?? []);
+  }
+  useEffect(() => {
+    getRankings();
+  }, []);
+
   return (
     <section>
       <div className="rounded-md border-2 border-gray-100 px-2 py-3">
@@ -12,24 +26,24 @@ export default function Rankings() {
           <div className="overflow-hidden rounded-lg border-2 border-gray-100 text-center text-sm lg:text-xl">
             <table className="w-full">
               <thead>
-                <tr className="bg-slate-100 font-display tracking-wide">
-                  <td>#</td>
-                  <td>team</td>
-                  <td>W</td>
-                  <td>PTS</td>
-                  <td>Bullseyes</td>
-                  <td>Hangjacks</td>
+                <tr className=" bg-slate-100 font-display tracking-wide">
+                  <td className="px-2">#</td>
+                  <td className="px-2">team</td>
+                  <td className="px-2">W</td>
+                  <td className="px-2">Bullseyes</td>
+                  <td className="px-2">Hangjacks</td>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Four Play</td>
-                  <td>4</td>
-                  <td>12</td>
-                  <td>20</td>
-                  <td>8</td>
-                </tr>
+                {rankings.map((team, index) => (
+                  <tr key={team.id}>
+                    <td>{index + 1}</td>
+                    <td>{team.name}</td>
+                    <td>{team.wins}</td>
+                    <td>{team.bullseyes_for}</td>
+                    <td>{team.hangjacks_for}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
