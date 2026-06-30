@@ -1,6 +1,7 @@
 import { Users, Clock } from "lucide-react";
 import { Game } from "../models/Game";
 import { Team } from "../models/Team";
+import { formatDateMDHM } from "../util/date";
 
 type ScoreCardProps = {
   game: Game;
@@ -41,7 +42,11 @@ export default function ScoresCard({ game, teamsById }: ScoreCardProps) {
             {" "}
             Division A
           </span>
-          <span className="block md:inline"> Started </span> 7:15 PM
+          <span className="block md:inline">
+            {" "}
+            Started <br />
+          </span>{" "}
+          {formatDateMDHM(game.start)}
         </div>
         <div className=" font-display text-4xl md:text-7xl ">
           {game.winner === game.teamA ? "W" : "L"}-
