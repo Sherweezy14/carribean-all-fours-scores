@@ -1,26 +1,26 @@
 import { TeamEntry } from "../types/TeamEntry";
 
 export class Game {
-  teamA: TeamEntry;
-  teamB: TeamEntry;
+  teamA: number;
+  teamABullseyes: number;
+  teamAHangJacks: number;
+  teamBBullseyes: number;
+  teamBHangJacks: number;
+  teamB: number;
   start: string;
   end: string;
-  constructor(teamA: TeamEntry, teamB: TeamEntry, start: string, end: string) {
+  winner: number;
+  id: number;
+  constructor(teamA: number, teamB: number, start: string, end: string) {
     this.teamA = teamA;
     this.teamB = teamB;
     this.start = start;
     this.end = end;
-
-    if (teamA.bullsEye > teamB.bullsEye) {
-      teamA.team.addWin();
-    } else if (teamB.bullsEye > teamA.bullsEye) {
-      teamB.team.addWin();
-    }
-
-    teamA.team.addBullsEyes(teamA.bullsEye, teamB.bullsEye);
-    teamA.team.addHangJacks(teamA.hangJacks, teamB.hangJacks);
-
-    teamB.team.addBullsEyes(teamB.bullsEye, teamA.bullsEye);
-    teamB.team.addHangJacks(teamB.hangJacks, teamA.hangJacks);
+    this.teamABullseyes = 0;
+    this.teamAHangJacks = 0;
+    this.teamBBullseyes = 0;
+    this.teamBHangJacks = 0;
+    this.winner = -1;
+    this.id = 0;
   }
 }

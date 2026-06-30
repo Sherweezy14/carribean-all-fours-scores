@@ -1,6 +1,13 @@
 import { Users, Clock } from "lucide-react";
+import { Game } from "../models/Game";
+import { Team } from "../models/Team";
 
-export default function ScoresCard() {
+type ScoreCardProps = {
+  game: Game;
+  teamsById: Record<number, Team>;
+};
+
+export default function ScoresCard({ game, teamsById }: ScoreCardProps) {
   return (
     <div
       className="col-span-1 flex cursor-pointer justify-between rounded-md border-2
@@ -21,9 +28,11 @@ export default function ScoresCard() {
           <div className="mb-3 hidden  font-semibold text-red-500 md:block">
             Division A
           </div>
-          <div className="text-md font-bold md:text-xl">Four Play</div>
-          <div>Bullseys: 5</div>
-          <div>HangJack: 2</div>
+          <div className="text-md font-bold md:text-xl">
+            {teamsById[game.teamA].name}
+          </div>
+          <div>Bullseys: {game.teamABullseyes} </div>
+          <div>HangJack: {game.teamAHangJacks} </div>
         </div>
       </div>
       <div className="flex flex-col items-center justify-center text-center">
@@ -34,7 +43,10 @@ export default function ScoresCard() {
           </span>
           <span className="block md:inline"> Started </span> 7:15 PM
         </div>
-        <div className=" font-display text-4xl md:text-7xl ">78-62</div>
+        <div className=" font-display text-4xl md:text-7xl ">
+          {game.winner === game.teamA ? "W" : "L"}-
+          {game.winner === game.teamB ? "W" : "L"}
+        </div>
         <div className="md:text-md font-sm flex items-center justify-center gap-1 text-sm">
           {" "}
           <Clock size={12} className="" /> 00:45:32
@@ -42,9 +54,11 @@ export default function ScoresCard() {
       </div>
       <div className="flex flex-col px-2 pt-8 md:flex-row ">
         <div className="order-2 flex flex-col pt-1 text-end text-xs md:order-1">
-          <div className=" font-bold md:text-xl">High Rollers</div>
-          <div>Bullseys: 5</div>
-          <div>HangJack: 2</div>
+          <div className=" font-bold md:text-xl">
+            {teamsById[game.teamB].name}
+          </div>
+          <div>Bullseys: {game.teamBBullseyes} </div>
+          <div>HangJack: {game.teamBHangJacks} </div>
         </div>
         <div className="order-1 flex flex-col items-center px-2 pt-1 text-white md:order-2">
           <div className="rounded-full bg-yellow-500 px-3 py-3 ">
