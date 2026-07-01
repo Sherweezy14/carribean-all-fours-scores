@@ -3,6 +3,8 @@ import NewHome from "./components/Newhome";
 import GameForm from "./components/GameForm";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/layout";
+import About from "./pages/AboutPage";
+import Schedule from "./pages/schedulepage";
 
 function App() {
   return (
@@ -11,6 +13,8 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<NewHome />} />
           <Route path="/game/new" element={<GameForm />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/schedule" element={<Schedule />} />
         </Route>
       </Routes>
     </div>
