@@ -1,15 +1,15 @@
-import { Calendar, Clock, Users, MapPin } from "lucide-react";
 import { supabase } from "../Supbase-Client";
 import { useEffect, useState } from "react";
 import { GameRow } from "../types/GameRow";
 import { TeamRow } from "../types/TeamRow";
-import { formatDateMDHM } from "../util/date";
-import { Team } from "../models/Team";
+import { formatDateHM, formatDateMDHM } from "../util/date";
+import { Link } from "react-router-dom";
 import { getTeamsById } from "../util/teamsById";
 
 export default function Schedule() {
   const [games, setGames] = useState<GameRow[]>([]);
   const [teams, setTeams] = useState<TeamRow[]>([]);
+  const [filteredGames, setFilteredGames] = useState<TeamRow[]>([]);
   const teamsById = getTeamsById(teams);
 
   async function getGames() {
@@ -28,73 +28,46 @@ export default function Schedule() {
   }, []);
 
   return (
-    <main className="bg-slate-50 px-4 py-8 md:px-8">
-      <section className="mx-auto max-w-6xl">
-        <div className="mb-8">
-          <p className="font-display text-lg tracking-[0.2em] text-red-700">
-            UNITY SPORTS CLUB
-          </p>
-          <h1 className="font-display text-5xl tracking-wide text-[#071b3a] md:text-7xl">
-            GAME SCHEDULE
+    <main className="bg-slate-50 px-4 py-6">
+      <section className="mx-auto max-w-6xl rounded-2xl bg-white shadow-sm">
+        <div className="border-b border-slate-200 p-5">
+          <h1 className="font-display text-4xl tracking-wide text-[#071b3a]">
+            Game Schedule
           </h1>
-          <p className="mt-2 text-slate-600">
-            View upcoming Round Robin All Fours tournament matches.
+          <p className="text-sm text-slate-500">
+            Click any game to view full details.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-5">
+        <div className="divide-y divide-slate-100">
           {games.map((game) => (
-            <div
+            <Link
               key={game.id}
-              className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
+              to={`/game/${game.id}`}
+              className="grid grid-cols-12 items-center gap-3 px-5 py-4 text-sm transition hover:bg-slate-50"
             >
-              <div className="mb-4 flex items-center justify-between">
-                <span className="rounded-full bg-blue-50 px-4 py-1 text-sm font-bold text-blue-700">
-                  round 1
+              <div className="col-span-2 font-semibold text-red-700">Round</div>
+
+              <div className="col-span-4 font-bold text-[#071b3a]">
+                {teamsById[game.team_a_id].name}
+                <span className="mx-2 text-slate-400">vs</span>
+                {teamsById[game.team_b_id].name}
+              </div>
+
+              <div className="col-span-2 text-slate-600">
+                {formatDateMDHM(game.start_time)}
+              </div>
+
+              <div className="col-span-2 text-slate-600">
+                {formatDateHM(game.start_time)}
+              </div>
+
+              <div className="col-span-2 text-right">
+                <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
+                  status
                 </span>
-
-                <span className="rounded-full bg-green-50 px-4 py-1 text-sm font-bold text-green-700">
-                  Live
-                </span>
               </div>
-
-              <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-3">
-                <div className="text-center md:text-left">
-                  <p className="text-sm text-slate-500">Home Team</p>
-                  <p className="font-display text-4xl tracking-wide text-[#071b3a]">
-                    {teamsById[game.team_a_id].name}
-                  </p>
-                </div>
-
-                <div className="text-center">
-                  <p className="font-display text-3xl text-red-700">VS</p>
-                </div>
-
-                <div className="text-center md:text-right">
-                  <p className="text-sm text-slate-500">Away Team</p>
-                  <p className="font-display text-4xl tracking-wide text-[#071b3a]">
-                    {teamsById[game.team_b_id].name}
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-6 grid grid-cols-1 gap-3 border-t border-slate-100 pt-4 text-sm text-slate-600 md:grid-cols-3">
-                <div className="flex items-center gap-2">
-                  <Calendar size={18} className="text-red-700" />
-                  <span>{formatDateMDHM(game.start_time)}</span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <Clock size={18} className="text-blue-700" />
-                  <span>length of time</span>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <MapPin size={18} className="text-yellow-500" />
-                  <span>location</span>
-                </div>
-              </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
