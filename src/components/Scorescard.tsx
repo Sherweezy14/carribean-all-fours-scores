@@ -30,7 +30,7 @@ export default function ScoresCard({ game, teamsById }: ScoreCardProps) {
             Division A
           </div>
           <div className="text-md font-bold md:text-xl">
-            {teamsById[game.teamA].name}
+            {teamsById[game.teamA]?.name}
           </div>
           <div>Bullseys: {game.teamABullseyes} </div>
           <div>HangJack: {game.teamAHangJacks} </div>
@@ -60,7 +60,7 @@ export default function ScoresCard({ game, teamsById }: ScoreCardProps) {
       <div className="flex flex-col px-2 pt-8 md:flex-row ">
         <div className="order-2 flex flex-col pt-1 text-end text-xs md:order-1">
           <div className=" font-bold md:text-xl">
-            {teamsById[game.teamB].name}
+            {teamsById[game.teamB]?.name}
           </div>
           <div>Bullseys: {game.teamBBullseyes} </div>
           <div>HangJack: {game.teamBHangJacks} </div>

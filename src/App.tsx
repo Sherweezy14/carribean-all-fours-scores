@@ -1,20 +1,18 @@
 import "./App.css";
-import Navbar from "./components/Navbar";
-import QuickNav from "./components/Quicknav";
 import NewHome from "./components/Newhome";
-import Footer from "./components/Footer";
-
 import GameForm from "./components/GameForm";
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/layout";
 
 function App() {
   return (
     <div className="flex min-h-screen flex-col">
-      <Navbar />
-      <QuickNav />
-      <NewHome />
-      <GameForm />
-      <div className="flex-1"></div>
-      <Footer />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<NewHome />} />
+          <Route path="/game/new" element={<GameForm />} />
+        </Route>
+      </Routes>
     </div>
   );
 }

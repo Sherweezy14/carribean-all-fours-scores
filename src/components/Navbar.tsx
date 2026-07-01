@@ -1,6 +1,6 @@
 import logo from "../assets/logo_nav.png";
 import cards from "../assets/cards.png";
-import React from "react";
+import { Link } from "react-router-dom";
 
 import {
   Radio,
@@ -24,29 +24,30 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="flex font-display bg-[#f8fafc] border-b border-slate-200 justify-between items-center min-w-xl   h-20 md:h-24  lg:h-24 border-1">
-      <div className="text-3xl  pl-2 md:text-4xl md:m-2 lg:hidden">☰</div>
-
-      <div className="border-1 flex items-center lg:pl-2 ">
-        <div>
-          <img className="h-20 md:h-24 lg:h-24" src={logo} alt="" />
+    <nav className="min-w-xl border-1 flex h-20 items-center justify-between border-b border-slate-200   bg-[#f8fafc] font-display  md:h-24 lg:h-24">
+      <div className="pl-2  text-3xl md:m-2 md:text-4xl lg:hidden">☰</div>
+      <Link to="/">
+        <div className="border-1 flex items-center lg:pl-2 ">
+          <div>
+            <img className="h-20 md:h-24 lg:h-24" src={logo} alt="" />
+          </div>
+          <div className="flex-col gap-2 px-2">
+            <p className="font-display text-4xl tracking-[0.081em] text-[#071b3a]  md:text-5xl">
+              ALL FOURS
+            </p>
+            <p className="text-md -mt-2 font-display tracking-[0.021em] text-red-700 md:text-xl md:tracking-[0.041em]">
+              ROUND ROBIN TOURNAMENT
+            </p>
+          </div>
         </div>
-        <div className="flex-col px-2 gap-2">
-          <p className="font-display text-4xl tracking-[0.081em] md:text-5xl  text-[#071b3a]">
-            ALL FOURS
-          </p>
-          <p className="font-display text-md tracking-[0.021em] md:tracking-[0.041em] md:text-xl -mt-2 text-red-700">
-            ROUND ROBIN TOURNAMENT
-          </p>
-        </div>
-      </div>
-      <div className=" hidden lg:flex items-center divide-x divide-slate-300 mt-2 md:mt-4">
+      </Link>
+      <div className=" mt-2 hidden items-center divide-x divide-slate-300 md:mt-4 lg:flex">
         {navLinks.map((link) => {
           const Icon = link.icon;
           return (
             <div
               key={link.name}
-              className="group flex flex-col items-center px-3 md:px-4 lg:px-6 cursor-pointer"
+              className="group flex cursor-pointer flex-col items-center px-3 md:px-4 lg:px-6"
             >
               <Icon
                 size={26}
@@ -59,12 +60,12 @@ group-hover:text-[#b11226]
               />
               <p
                 className="
+      border-b-2
+      border-transparent
       text-xl
       tracking-wider
       transition-all
       duration-200
-      border-b-2
-      border-transparent
       group-hover:border-[#b11226]
       group-hover:text-[#b11226]
     "
@@ -81,10 +82,10 @@ group-hover:text-[#b11226]
         <img
           src={cards}
           alt=""
-          className="hidden w-full h-full md:block
+          className="hidden h-full w-full md:block
     "
         />
-        <BellRing size="22" className="hover:text-red-600 md:hidden"/>
+        <BellRing size="22" className="hover:text-red-600 md:hidden" />
       </div>
     </nav>
   );
