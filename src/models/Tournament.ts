@@ -91,29 +91,6 @@ export class Tournament {
   ) {
     const teamA = this.findTeam(teamAName);
     const teamB = this.findTeam(teamBName);
-
-    if (teamA && teamB) {
-      const game = new Game(
-        { team: teamA, bullsEye: teamABullsEye, hangJacks: teamAHangJacks },
-        { team: teamB, bullsEye: teamBBullsEye, hangJacks: teamBHangJacks },
-        start,
-        end,
-      );
-
-      switch (round) {
-        case 1:
-          this.roundOne.push(game);
-          break;
-        case 2:
-          this.roundTwo.push(game);
-          break;
-        case 3:
-          this.roundThree.push(game);
-          break;
-      }
-    } else {
-      console.error("One or both teams not found.");
-    }
   }
 
   /**
@@ -124,28 +101,4 @@ export class Tournament {
    * if another tie least HJ lost
    *
    */
-  public getTopTeamsByBullsEye(): Team[] {
-    const allTeams: Team[] = this.divisions.flatMap(
-      (division) => division.teams,
-    );
-    const sortedTeams = allTeams.sort((a, b) => {
-      if (b.bullsEyeWins !== a.bullsEyeWins) {
-        return b.bullsEyeWins - a.bullsEyeWins;
-      } else if (a.bullsEyeLosses !== b.bullsEyeLosses) {
-        return a.bullsEyeLosses - b.bullsEyeLosses;
-      } else if (
-        b.bullsEyeWins + b.hangJackWins !==
-        a.bullsEyeWins + a.hangJackWins
-      ) {
-        return (
-          b.bullsEyeWins + b.hangJackWins - (a.bullsEyeWins + a.hangJackWins)
-        );
-      } else if (b.hangJackWins !== a.hangJackWins) {
-        return b.hangJackWins - a.hangJackWins;
-      } else {
-        return a.hangJackLosses - b.hangJackLosses;
-      }
-    });
-    return sortedTeams;
-  }
 }

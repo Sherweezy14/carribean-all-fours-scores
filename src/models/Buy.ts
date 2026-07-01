@@ -15,10 +15,5 @@ export class Buy {
     this.buy = buy;
     this.start = start;
     this.end = end;
-
-    teamA.team.addWin();
-    teamA.team.addBuy();
-    teamA.team.addBullsEyes(teamA.bullsEye, buy.bullsEye);
-    teamA.team.addHangJacks(teamA.hangJacks, buy.hangJacks);
   }
 }

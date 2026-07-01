@@ -26,7 +26,9 @@ export default function Schedule() {
     getGames();
     getTeams();
   }, []);
-
+  if (!games || teams.length === 0) {
+    return <>loading ..</>;
+  }
   return (
     <main className="bg-slate-50 px-4 py-6">
       <section className="mx-auto max-w-6xl rounded-2xl bg-white shadow-sm">

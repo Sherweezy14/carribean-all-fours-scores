@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./components/layout";
 import About from "./pages/AboutPage";
 import Schedule from "./pages/schedulepage";
+import ViewGame from "./pages/view_game_page";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/game/new" element={<GameForm />} />
           <Route path="/about" element={<About />} />
           <Route path="/schedule" element={<Schedule />} />
+          <Route path="game/:id" element={<ViewGame />} />
         </Route>
       </Routes>
     </div>

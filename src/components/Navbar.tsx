@@ -45,11 +45,8 @@ export default function Navbar() {
         {navLinks.map((link) => {
           const Icon = link.icon;
           return (
-            <Link to={link.link}>
-              <div
-                key={link.name}
-                className="group flex cursor-pointer flex-col items-center px-3 md:px-4 lg:px-6"
-              >
+            <Link key={link.name} to={link.link}>
+              <div className="group flex cursor-pointer flex-col items-center px-3 md:px-4 lg:px-6">
                 <Icon
                   size={26}
                   className="
