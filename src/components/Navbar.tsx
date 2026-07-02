@@ -23,7 +23,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="min-w-xl border-1 flex h-20 items-center justify-between border-b border-slate-200 bg-[#041533]   font-display text-white  md:h-24 lg:h-24">
+    <nav className=" border-1 flex h-20 items-center justify-between border-b border-slate-200 bg-[#041533]   font-display text-white  md:h-24 lg:h-24">
       <div className="pl-2  text-3xl md:m-2 md:text-4xl lg:hidden">☰</div>
       <Link to="/">
         <div className="border-1 flex items-center lg:pl-2 ">
