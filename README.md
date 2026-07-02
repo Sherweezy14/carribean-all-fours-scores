@@ -1,46 +1,216 @@
-# Getting Started with Create React App
+# Unity Sports Club Round Robin Tournament
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> A modern tournament management platform built for the Unity Sports Club All Fours Round Robin Tournament.
 
-## Available Scripts
+![Home Page Screenshot](./screenshots/homepage.png)
 
-In the project directory, you can run:
+## 🌐 Live Demo
 
-### `npm start`
+**Live Site:** https://tournament-manager-chi-taupe.vercel.app/
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Overview
 
-### `npm test`
+The Unity Sports Club Round Robin Tournament is one of the longest-running All Fours tournaments in the United States. Founded in **1980** by **Clarence Cooper** and the **Unity Sports Club** in Boston, Massachusetts, the tournament has brought together players from across New England, the United States, and the Caribbean for more than 45 years.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This application modernizes tournament management by replacing hard-coded data and manual tracking with a fully dynamic web application powered by React, TypeScript, PostgreSQL, and Supabase.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Project History
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This repository began as a fork of an earlier project created by my cousin, **Christian Cooper**.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The original project demonstrated tournament information using hard-coded data.
 
-### `npm run eject`
+Since forking the project, I have redesigned and expanded it into a fully dynamic application by:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Converting static data into a relational PostgreSQL database
+- Integrating Supabase as the backend
+- Designing a normalized database structure
+- Creating SQL Views for tournament rankings and statistics
+- Building responsive React pages
+- Creating dynamic routing for teams, games, schedules, and standings
+- Refactoring components to TypeScript
+- Building reusable components throughout the application
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The project continues to grow into a complete tournament management system.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+---
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Features
 
-## Learn More
+## Tournament
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Live tournament standings
+- Division standings
+- Tournament statistics
+- Game schedule
+- Individual game pages
+- Team pages
+- Responsive mobile-first design
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Administration
+
+- Create new games
+- Dynamic score entry
+- Automatic standings calculations
+- Automatic tournament statistics
+
+## Database
+
+- Normalized PostgreSQL schema
+- SQL Views for calculated standings
+- Dynamic Supabase queries
+- Relational data model
+
+---
+
+# Technology Stack
+
+### Frontend
+
+- React
+- TypeScript
+- Tailwind CSS
+- React Router
+
+### Backend
+
+- Supabase
+- PostgreSQL
+
+### Development
+
+- Git
+- GitHub
+- Vercel
+
+---
+
+# Screenshots
+
+## Home Page
+
+![Home](./screenshots/homepage.png)
+
+---
+
+## Tournament Rankings
+
+![Rankings](./screenshots/rankings.png)
+
+---
+
+## Division Standings
+
+![Division Standings](./screenshots/divisions.png)
+
+---
+
+## Team Page
+
+![Team](./screenshots/team.png)
+
+---
+
+## Game Details
+
+![Game Details](./screenshots/game-details.png)
+
+---
+
+## Schedule
+
+![Schedule](./screenshots/schedule.png)
+
+---
+
+# Database Architecture
+
+```
+Games
+   │
+   ▼
+team_stats_from_games (View)
+   │
+   ▼
+team_rankings (View)
+   │
+   ├──────────────► Tournament Rankings
+   │
+   ▼
+division_rankings (View)
+   │
+   ▼
+Division Standings
+```
+
+The application uses SQL Views to calculate tournament statistics rather than storing duplicate data, ensuring that standings always reflect the latest game results.
+
+---
+
+# Planned Features
+
+- User authentication
+- Administrator dashboard
+- Player profiles
+- Tournament history
+- Team logos
+- Search & filtering
+- Multiple tournament support
+- Live score updates
+- Notifications
+- Public API
+- Advanced statistics
+- Historical records
+
+---
+
+# Running Locally
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Sherweezy14/carribean-all-fours-scores.git
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm start
+```
+
+---
+
+# Environment Variables
+
+Create a `.env` file:
+
+```env
+REACT_APP_SUPABASE_URL=your_supabase_url
+REACT_APP_SUPABASE_ANON_KEY=your_supabase_key
+```
+
+---
+
+# Author
+
+## Sherwyn Cooper
+
+Software Engineer
+
+Built to preserve and modernize one of the oldest and most respected Caribbean All Fours tournaments in the United States.
+
+---
+
+### Acknowledgements
+
+Special thanks to **Christian Rudder**, whose original project inspired this application. This project has since been redesigned and expanded into a fully dynamic tournament management platform.
