@@ -1,6 +1,7 @@
 import { supabase } from "../Supbase-Client";
 import { useEffect, useState } from "react";
 import { RankingsRow } from "../types/RankingsRow";
+import { Link } from "react-router-dom";
 
 export default function Rankings() {
   const [rankings, setRankings] = useState<RankingsRow[]>([]);
@@ -48,11 +49,13 @@ export default function Rankings() {
             </table>
           </div>
 
-          <div className="mt-2  cursor-pointer rounded-md bg-red-700 shadow-md shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-xl">
-            <p className="text-center font-display text-xl text-white">
-              View full Rankings
-            </p>
-          </div>
+          <Link to="/rankings">
+            <div className="mt-2  cursor-pointer rounded-md bg-red-700 shadow-md shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-xl">
+              <p className="text-center font-display text-xl text-white">
+                View full Rankings
+              </p>
+            </div>
+          </Link>
         </div>
       </div>
     </section>

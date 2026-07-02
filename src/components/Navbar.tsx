@@ -11,7 +11,6 @@ import {
   ShieldAlert,
   BellRing,
 } from "lucide-react";
-import { NativeBuffer } from "mongoose";
 
 export default function Navbar() {
   const navLinks = [
@@ -19,7 +18,7 @@ export default function Navbar() {
     { name: "schedule", link: "/schedule", icon: Calendar },
     { name: "rankings", link: "/rankings", icon: Trophy },
     { name: "teams", link: "/teams", icon: Users },
-    { name: "divisions", link: "/", icon: Layers },
+    { name: "divisions", link: "/divisions", icon: Layers },
     { name: "about", link: "/about", icon: ShieldAlert },
   ];
 
@@ -28,8 +27,8 @@ export default function Navbar() {
       <div className="pl-2  text-3xl md:m-2 md:text-4xl lg:hidden">☰</div>
       <Link to="/">
         <div className="border-1 flex items-center lg:pl-2 ">
-          <div>
-            <img className="h-20 md:h-24 lg:h-24" src={logo} alt="" />
+          <div className="pt-2">
+            <img className=" h-40 w-auto md:h-44 lg:h-32" src={logo} alt="" />
           </div>
           <div className="flex-col gap-2 px-2">
             <p className="font-display text-4xl tracking-[0.081em] text-white  md:text-5xl">
@@ -60,7 +59,7 @@ group-hover:text-[#b11226]
       border-b-2
       border-transparent
       text-xl
-      tracking-wider
+      tracking-wide
       transition-all
       duration-200
       group-hover:border-[#b11226]

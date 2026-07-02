@@ -8,6 +8,8 @@ import Schedule from "./pages/schedulepage";
 import ViewGame from "./pages/view_game_page";
 import ViewTeams from "./pages/view_teams_page";
 import ViewTeam from "./pages/ViewTeam";
+import DivisionRankings from "./pages/RankingsByDivisionsPage";
+import Rankings from "./pages/RankingsPage";
 
 function App() {
   return (
@@ -18,10 +20,11 @@ function App() {
           <Route path="/game/new" element={<GameForm />} />
           <Route path="/about" element={<About />} />
           <Route path="/schedule" element={<Schedule />} />
+          <Route path="/divisions" element={<DivisionRankings />} />
+          <Route path="/rankings" element={<Rankings />} />
           <Route path="game/:id" element={<ViewGame />} />
-          <Route path="teams" element={<ViewTeams />} />
-
-          <Route path="teams/:id" element={<ViewTeam />} />
+          <Route path="/teams" element={<ViewTeams />} />
+          <Route path="/teams/:id" element={<ViewTeam />} />
         </Route>
       </Routes>
     </div>

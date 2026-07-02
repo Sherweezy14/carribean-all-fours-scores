@@ -34,7 +34,7 @@ export default function ViewTeam() {
     getTeamGames();
   }, []);
 
-  if (!team || teamGames.length === 0) {
+  if (!team) {
     return <> loading ...</>;
   }
 
@@ -67,33 +67,29 @@ export default function ViewTeam() {
         <div className="grid grid-cols-3 gap-4 border-b bg-slate-50 p-5 text-center">
           <div>
             <p className="text-sm text-slate-500">Games</p>
-            <p className="text-2xl font-bold">{teamGames.length}</p>
+            <p className="text-2xl font-bold">{teamGames.length | 0}</p>
           </div>
 
           <div>
             <p className="text-sm text-slate-500">Wins</p>
             <p className="text-2xl font-bold">
-              {
-                teamGames.filter((game) => game.winner_team_id === team.id)
-                  .length
-              }
+              {teamGames.filter((game) => game.winner_team_id === team.id)
+                .length | 0}
             </p>
           </div>
 
           <div>
             <p className="text-sm text-slate-500">Losses</p>
             <p className="text-2xl font-bold">
-              {
-                teamGames.filter(
-                  (game: GameRow) => game.winner_team_id !== team.id,
-                ).length
-              }
+              {teamGames.filter(
+                (game: GameRow) => game.winner_team_id !== team.id,
+              ).length | 0}
             </p>
           </div>
         </div>
 
         <div className="divide-y divide-slate-100">
-          {teamGames.map((game: GameRow) => {
+          {teamGames?.map((game: GameRow) => {
             const isTeamA = game.team_a_id === team.id;
 
             const teamBullseyes = isTeamA
