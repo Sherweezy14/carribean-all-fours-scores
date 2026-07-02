@@ -33,7 +33,7 @@ export default function ViewTeams() {
 
   useEffect(() => {
     getTeams();
-    const res = getDivisions();
+    getDivisions();
   }, []);
 
   if (divisions.length === 0 || teams.length === 0) {

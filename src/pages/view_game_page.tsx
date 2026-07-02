@@ -1,15 +1,7 @@
-import {
-  Trophy,
-  Clock,
-  Calendar,
-  ArrowLeft,
-  Flag,
-  DivideIcon,
-} from "lucide-react";
+import { Trophy, Clock, Calendar, ArrowLeft, Flag } from "lucide-react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "../Supbase-Client";
-import { Link } from "react-router-dom";
 import { TeamRow } from "../types/TeamRow";
 import { GameRow } from "../types/GameRow";
 import { getTeamsById } from "../util/teamsById";
@@ -23,21 +15,20 @@ export default function ViewGame() {
   const teamsById = getTeamsById(teams);
   const navigate = useNavigate();
 
-  async function getGame() {
-    const { data, error } = await supabase
-      .from("Games")
-      .select("*")
-      .eq("id", gameId)
-      .single();
-    return error ? error : setGame(data);
-  }
-
-  async function getTeams() {
-    const { data, error } = await supabase.from("Teams").select("*");
-    return error ? error : setTeams(data);
-  }
-
   useEffect(() => {
+    async function getGame() {
+      const { data, error } = await supabase
+        .from("Games")
+        .select("*")
+        .eq("id", gameId)
+        .single();
+      return error ? error : setGame(data);
+    }
+
+    async function getTeams() {
+      const { data, error } = await supabase.from("Teams").select("*");
+      return error ? error : setTeams(data);
+    }
     getGame();
     getTeams();
   }, []);

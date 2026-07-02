@@ -9,7 +9,6 @@ import { getTeamsById } from "../util/teamsById";
 export default function Schedule() {
   const [games, setGames] = useState<GameRow[]>([]);
   const [teams, setTeams] = useState<TeamRow[]>([]);
-  const [filteredGames, setFilteredGames] = useState<TeamRow[]>([]);
   const teamsById = getTeamsById(teams);
 
   async function getGames() {

@@ -5,31 +5,30 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Trophy, ChevronRight } from "lucide-react";
 import { GameRow } from "../types/GameRow";
-import { Game } from "../models/Game";
 
 export default function ViewTeam() {
   const [team, setTeam] = useState<TeamRow | null>(null);
   const [teamGames, setTeamGames] = useState<GameRow[]>([]);
   const { id } = useParams();
   const teamId = id;
-  async function getTeamGames() {
-    const { data, error } = await supabase
-      .from("Games")
-      .select("*")
-      .or(`team_a_id.eq.${teamId},team_b_id.eq.${teamId}`)
-      .order("start_time", { ascending: false });
-    return error ? error : setTeamGames(data);
-  }
-  async function getTeam() {
-    const { data, error } = await supabase
-      .from("Teams")
-      .select("*")
-      .eq("id", teamId)
-      .single();
-    return error ? error : setTeam(data);
-  }
 
   useEffect(() => {
+    async function getTeamGames() {
+      const { data, error } = await supabase
+        .from("Games")
+        .select("*")
+        .or(`team_a_id.eq.${teamId},team_b_id.eq.${teamId}`)
+        .order("start_time", { ascending: false });
+      return error ? error : setTeamGames(data);
+    }
+    async function getTeam() {
+      const { data, error } = await supabase
+        .from("Teams")
+        .select("*")
+        .eq("id", teamId)
+        .single();
+      return error ? error : setTeam(data);
+    }
     getTeam();
     getTeamGames();
   }, []);
