@@ -22,17 +22,20 @@ export default function TournamentStats() {
       <div className="flex justify-between">
         <div className="flex flex-col items-center">
           <Target size={48} className="text-red-700" />
-          <p className="text-2xl">Bullseyes</p>
+          <p className="hidden text-2xl md:block">Bullseyes</p>{" "}
+          <p className=" text-2xl md:hidden"> BE</p>
           <p className="text-6xl">{stats?.bull_seyes}</p>
         </div>
         <div className="flex flex-col items-center">
           <Spade size={48} className="text-yellow-400" />
-          <p className="text-2xl">Hangjacks</p>
+          <p className=" hidden text-2xl md:block">Hangjacks</p>{" "}
+          <p className=" text-2xl md:hidden"> HJ</p>
           <p className="text-6xl">{stats?.hang_jacks}</p>
         </div>
         <div className="flex flex-col items-center">
           <Gamepad size={48} className="text-blue-950" />
-          <p className="text-2xl">Games played</p>
+          <p className=" hidden text-2xl md:block">Games played</p>
+          <p className=" text-2xl md:hidden"> Games</p>
           <p className="text-6xl">{stats?.games_played}</p>
         </div>
       </div>

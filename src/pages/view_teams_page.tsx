@@ -77,19 +77,19 @@ export default function ViewTeams() {
             className="grid grid-cols-12 items-center border-b px-6 py-5 transition hover:bg-slate-50"
           >
             <div className="col-span-7 flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-700 text-lg font-bold text-white">
+              <div className="hidden h-12  w-12 items-center justify-center rounded-full bg-red-700 text-lg font-bold text-white md:flex">
                 {team.name.charAt(0)}
               </div>
 
               <div>
-                <h2 className="text-xl font-bold text-[#071b3a]">
+                <h2 className="text-base font-bold text-[#071b3a] md:text-xl">
                   {team.name}
                 </h2>
               </div>
             </div>
 
             <div className="col-span-4">
-              <span className="rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-blue-700">
+              <span className="rounded-full bg-blue-100 px-1 py-1 text-sm font-semibold text-blue-700 md:px-3">
                 {divisionsById[team.division_id].name}
               </span>
             </div>

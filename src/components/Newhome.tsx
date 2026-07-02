@@ -19,8 +19,6 @@ export default function NewHome() {
     return acc;
   }, {});
 
-  console.log(teamsById);
-
   async function getGames() {
     const { data, error } = await supabase.from("Games").select("*");
     setGames(data ?? []);

@@ -58,15 +58,15 @@ export default function ViewGame() {
 
         {/* Scoreboard */}
 
-        <div className="grid grid-cols-3 items-center p-10">
+        <div className="grid grid-cols-3 items-center p-2 md:p-10">
           {/* Team A */}
 
           <div className="text-center">
-            <h2 className="font-display text-5xl text-[#071b3a]">
+            <h2 className="font-display text-xl text-[#071b3a] md:text-5xl">
               {teamsById[game?.team_a_id].name}
             </h2>
 
-            <p className="mt-6 text-8xl font-black text-red-700">
+            <p className="mt-6 text-3xl font-black text-red-700 md:text-8xl">
               {game.team_a_bullseyes}
             </p>
           </div>
@@ -74,34 +74,38 @@ export default function ViewGame() {
           {/* Middle */}
 
           <div className="text-center">
-            <p className="text-xl tracking-[0.3em] text-slate-400">VS</p>
+            <p className="text-sm tracking-[0.3em] text-slate-400 md:text-xl">
+              VS
+            </p>
 
-            <div className="my-8">
-              <div className="mb-4 rounded-xl bg-slate-100 p-4">
-                <p className="text-sm uppercase text-slate-500">Bullseyes</p>
+            <div className="my-3 md:my-8">
+              <div className="mb-4 rounded-xl bg-slate-100 p-2 md:p-4">
+                <p className="text-xs uppercase text-slate-500 md:text-sm">
+                  Bullseyes
+                </p>
 
-                <p className="text-3xl font-bold">
+                <p className="text-md font-bold md:text-3xl">
                   {game.team_a_bullseyes} - {game.team_b_bullseyes}
                 </p>
               </div>
 
-              <div className="rounded-xl bg-slate-100 p-4">
-                <p className="text-sm uppercase text-slate-500">Hang Jacks</p>
+              <div className="rounded-xl bg-slate-100 p-2 md:p-4">
+                <p className="text-xs uppercase text-slate-500">Hang Jacks</p>
 
-                <p className="text-3xl font-bold">
+                <p className="text-md font-bold md:text-3xl">
                   {game.team_a_hangjacks} - {game.team_b_hangjacks}
                 </p>
               </div>
             </div>
 
-            <div className="rounded-xl bg-yellow-100 p-4">
-              <div className="flex justify-center gap-2">
+            <div className="rounded-xl bg-yellow-100 p-2 md:p-4">
+              <div className="flex flex-col items-center justify-center gap-2 md:flex-row md:items-start">
                 <Trophy className="text-yellow-600" />
 
                 <span className="font-bold">Winner</span>
               </div>
 
-              <p className="mt-2 text-2xl font-bold">
+              <p className="mt-2 text-xs font-bold md:text-2xl">
                 {teamsById[game.winner_team_id].name}
               </p>
             </div>
@@ -110,9 +114,11 @@ export default function ViewGame() {
           {/* Team B */}
 
           <div className="text-center">
-            <h2 className="font-display text-5xl text-[#071b3a]">team b</h2>
+            <h2 className="font-display text-xl text-[#071b3a] md:text-5xl">
+              {teamsById[game.team_b_id].name}
+            </h2>
 
-            <p className="mt-6 text-8xl font-black text-blue-700">
+            <p className="mt-6 text-2xl font-black text-blue-700 md:text-8xl">
               {game.team_b_bullseyes}
             </p>
           </div>

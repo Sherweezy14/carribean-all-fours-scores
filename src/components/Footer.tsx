@@ -21,7 +21,9 @@ export default function Footer() {
 
           <p className="text-sm">Building Community Through Sports & Culture</p>
 
-          <p className="font-mono text-yellow-500">One Community • One Unity</p>
+          <p className="hidden font-mono text-yellow-500 md:block">
+            One Community • One Unity
+          </p>
         </div>
       </div>
     </footer>

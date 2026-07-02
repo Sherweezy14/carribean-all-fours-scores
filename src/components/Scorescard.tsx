@@ -17,11 +17,11 @@ export default function ScoresCard({ game, teamsById }: ScoreCardProps) {
         py-1 shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-xl md:col-span-2"
     >
       <div className="flex flex-col px-2 py-1 md:flex-row ">
-        <div className="flex flex-col items-center pr-2 text-white">
-          <div className="mb-2   rounded-md bg-red-500 px-1 py-1 text-xs font-bold md:text-sm">
+        <div className="flex flex-col  pr-2 text-white">
+          <div className="mb-2 w-fit rounded-md bg-red-500 px-1 py-1 text-xs font-bold md:text-sm">
             Live Now
           </div>
-          <div className="rounded-full bg-red-900 px-3 py-3">
+          <div className="w-fit rounded-full bg-red-900 px-3 py-3">
             <Users size={24} strokeWidth={3} />
           </div>
         </div>
@@ -32,8 +32,14 @@ export default function ScoresCard({ game, teamsById }: ScoreCardProps) {
           <div className="text-md font-bold md:text-xl">
             {teamsById[game.teamA]?.name}
           </div>
-          <div>Bullseys: {game.teamABullseyes} </div>
-          <div>HangJack: {game.teamAHangJacks} </div>
+          <div>
+            <span className="hidden md:block">Bullseys:</span>{" "}
+            <span className=" md:hidden">BE:</span> {game.teamABullseyes}{" "}
+          </div>
+          <div>
+            <span className="hidden md:block">Bullseys:</span>{" "}
+            <span className=" md:hidden">BE:</span> {game.teamAHangJacks}{" "}
+          </div>
         </div>
       </div>
       <div className="flex flex-col items-center justify-center text-center">
@@ -62,11 +68,18 @@ export default function ScoresCard({ game, teamsById }: ScoreCardProps) {
           <div className=" font-bold md:text-xl">
             {teamsById[game.teamB]?.name}
           </div>
-          <div>Bullseys: {game.teamBBullseyes} </div>
-          <div>HangJack: {game.teamBHangJacks} </div>
+          <div>
+            <span className="hidden md:block">Bullseys:</span>{" "}
+            <span className=" md:hidden">BE:</span> {game.teamBBullseyes}{" "}
+          </div>
+          <div>
+            {" "}
+            <span className="hidden md:block">HangJack:</span>{" "}
+            <span className=" md:hidden">HJ:</span> {game.teamBHangJacks}{" "}
+          </div>
         </div>
-        <div className="order-1 flex flex-col items-center px-2 pt-1 text-white md:order-2">
-          <div className="rounded-full bg-yellow-500 px-3 py-3 ">
+        <div className="order-1 flex flex-col items-end pt-1 text-white md:order-2">
+          <div className="w-fit rounded-full bg-yellow-500 px-3 py-3 ">
             <Users size={24} strokeWidth={3} />
           </div>
         </div>

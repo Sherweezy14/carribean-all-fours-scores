@@ -38,11 +38,11 @@ export default function Rankings() {
         <div className="grid grid-cols-12 bg-slate-50 px-4 py-3 text-xs font-bold uppercase tracking-wide text-slate-500">
           <div className="col-span-1">#</div>
           <div className="col-span-4">Team</div>
-          <div className="col-span-2">Division</div>
+          <div className="col-span-2">Div</div>
           <div className="col-span-1 text-center">GP</div>
           <div className="col-span-1 text-center">W</div>
           <div className="col-span-1 text-center">L</div>
-          <div className="col-span-1 text-center">Bulls</div>
+          <div className="col-span-1 text-center">BE</div>
           <div className="col-span-1 text-center">HJ</div>
         </div>
 
@@ -61,8 +61,8 @@ export default function Rankings() {
                 {team.team_name}
               </div>
 
-              <div className="col-span-2">
-                <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
+              <div className="col-span-2 text-center md:text-left">
+                <span className="rounded-full bg-blue-50  text-xs font-semibold text-blue-700 md:px-3 md:py-1">
                   {team.division_name}
                 </span>
               </div>

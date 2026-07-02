@@ -28,7 +28,11 @@ export default function Navbar() {
       <Link to="/">
         <div className="border-1 flex items-center lg:pl-2 ">
           <div className="pt-2">
-            <img className=" h-40 w-auto md:h-44 lg:h-32" src={logo} alt="" />
+            <img
+              className=" h-24 w-auto md:block md:h-44 lg:h-32"
+              src={logo}
+              alt=""
+            />
           </div>
           <div className="flex-col gap-2 px-2">
             <p className="font-display text-4xl tracking-[0.081em] text-white  md:text-5xl">

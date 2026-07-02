@@ -50,7 +50,7 @@ export default function ViewTeam() {
           </Link>
 
           <div className="flex items-center gap-4">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-700 text-3xl font-bold text-white">
+            <div className="hidden h-16 w-16 items-center justify-center rounded-full bg-red-700 text-3xl font-bold text-white md:flex">
               {team.name.charAt(0)}
             </div>
 
@@ -117,7 +117,7 @@ export default function ViewTeam() {
               >
                 <div className="col-span-2">
                   <span
-                    className={`rounded-full px-3 py-1 text-xs font-bold ${
+                    className={`rounded-full px-1 py-1 text-xs font-bold md:px-3 md:py-1 ${
                       result === "Win"
                         ? "bg-green-100 text-green-700"
                         : "bg-red-100 text-red-700"
@@ -132,14 +132,14 @@ export default function ViewTeam() {
                 </div>
 
                 <div className="col-span-4 text-slate-600">
-                  Hang Jacks: {teamHangjacks} - {opponentHangjacks}
+                  HangJacks: {teamHangjacks} - {opponentHangjacks}
                 </div>
 
                 <div className="col-span-1 flex items-center gap-1 text-yellow-600">
                   {result === "Win" && <Trophy size={16} />}
                 </div>
 
-                <div className="col-span-1 flex justify-end">
+                <div className="col-span-1 hidden justify-end md:flex">
                   <ChevronRight size={20} className="text-slate-400" />
                 </div>
               </Link>
