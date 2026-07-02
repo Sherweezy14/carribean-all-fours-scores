@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="/carribean-all-fours-scores">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>,
