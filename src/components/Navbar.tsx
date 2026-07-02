@@ -79,11 +79,11 @@ group-hover:text-[#b11226]
 
         <div></div>
       </div>
-      <div className=" px-5  md:h-24  md:px-0 ">
+      <div className=" w-auto  px-5 md:h-24 md:px-0 ">
         <img
           src={cards}
           alt=""
-          className="hidden h-full w-full md:block
+          className="hidden h-24 w-auto object-contain md:block
     "
         />
         <BellRing size="22" className="hover:text-red-600 md:hidden" />
