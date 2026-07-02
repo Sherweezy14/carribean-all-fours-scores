@@ -29,7 +29,7 @@ export default function Navbar() {
         <div className="border-1 flex items-center lg:pl-2 ">
           <div className="pt-2">
             <img
-              className=" h-24 w-auto md:block md:h-44 lg:h-32"
+              className=" h-24 w-auto md:block md:h-32 lg:h-32"
               src={logo}
               alt=""
             />
