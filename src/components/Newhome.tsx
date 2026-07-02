@@ -9,6 +9,7 @@ import { mapGameRowToGame } from "../mappers/GameMapper";
 import { TeamRow } from "../types/TeamRow";
 import { Team } from "../models/Team";
 import { teamRowtoTeamMapper } from "../mappers/TeamMapper";
+import { Link } from "react-router-dom";
 
 export default function NewHome() {
   const [games, setGames] = useState<GameRow[]>([]);
@@ -39,7 +40,7 @@ export default function NewHome() {
 
   return (
     <section className="grid grid-flow-row-dense grid-cols-1 gap-2 px-5 py-5 lg:grid-cols-3 ">
-      <div className="col-span-1 flex flex-col gap-2 pl-2 md:col-span-2 ">
+      <div className=" col-span-1 flex flex-col gap-2 rounded-md bg-white px-2 pl-2 md:col-span-2 ">
         <div className="flex justify-between pb-5">
           <div className="flex md:flex-col">
             <div className="flex gap-2 pt-2">
@@ -58,15 +59,17 @@ export default function NewHome() {
 
         {/* Card Component*/}
         {games.map((game, index) => (
-          <ScoresCard
-            key={game.id}
-            game={mapGameRowToGame(game)}
-            teamsById={teamsById}
-          />
+          <Link to={`/game/${game.id}`}>
+            <ScoresCard
+              key={game.id}
+              game={mapGameRowToGame(game)}
+              teamsById={teamsById}
+            />
+          </Link>
         ))}
       </div>
 
-      <div className="col-span-1">
+      <div className="col-span-1 rounded-md bg-white p-2">
         <Rankings />
         <TournamentStats />
       </div>

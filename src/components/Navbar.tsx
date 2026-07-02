@@ -15,10 +15,10 @@ import { NativeBuffer } from "mongoose";
 
 export default function Navbar() {
   const navLinks = [
-    { name: "live", link: "/", icon: Radio },
-    { name: "schedule", link: "/", icon: Calendar },
-    { name: "rankings", link: "/", icon: Trophy },
-    { name: "teams", link: "/", icon: Users },
+    { name: "Home", link: "/", icon: Radio },
+    { name: "schedule", link: "/schedule", icon: Calendar },
+    { name: "rankings", link: "/rankings", icon: Trophy },
+    { name: "teams", link: "/teams", icon: Users },
     { name: "divisions", link: "/", icon: Layers },
     { name: "about", link: "/about", icon: ShieldAlert },
   ];

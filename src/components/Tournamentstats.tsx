@@ -15,7 +15,7 @@ export default function TournamentStats() {
   }, []);
 
   return (
-    <section className="mt-3 flex flex-col rounded-md border-2 border-gray-100 px-2 py-3 font-display">
+    <section className="mt-3 flex flex-col rounded-md border-2 border-gray-100 px-2 py-3 font-display shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-xl">
       <div className="  text-2xl tracking-wide text-blue-950">
         Tournment STATS
       </div>

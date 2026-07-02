@@ -23,7 +23,7 @@ export default function Rankings() {
             </span>
             <span className="text-red-500"> Division A</span>
           </div>
-          <div className="overflow-hidden rounded-lg border-2 border-gray-100 text-center text-sm lg:text-xl">
+          <div className="overflow-hidden rounded-lg border-2 border-gray-100 text-center text-sm shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-xl lg:text-xl">
             <table className="w-full">
               <thead>
                 <tr className=" bg-slate-100 font-display tracking-wide ">
@@ -48,7 +48,7 @@ export default function Rankings() {
             </table>
           </div>
 
-          <div className="mt-2 cursor-pointer rounded-md bg-red-700 shadow-md">
+          <div className="mt-2  cursor-pointer rounded-md bg-red-700 shadow-md shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-xl">
             <p className="text-center font-display text-xl text-white">
               View full Rankings
             </p>

@@ -20,10 +20,10 @@ export default function QuickNav() {
             h-16
             cursor-pointer
             flex-col
-            items-center  justify-center rounded-md border-2 border-gray-100 bg-[#f8fafc] shadow-sm transition-all duration-200 hover:-translate-y-1 hover:bg-red-700 hover:text-white hover:shadow-lg md:h-20"
+            items-center  justify-center rounded-md border-2 border-gray-100 bg-white shadow-sm transition-all duration-200 hover:-translate-y-1 hover:bg-red-700 hover:text-white hover:shadow-lg md:h-20"
           >
             <link.icon className=" mb-1" />
-            <p className="text-xs">{link.name}</p>
+            <p className="text-xs  md:text-xl">{link.name}</p>
           </div>
         );
       })}
