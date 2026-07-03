@@ -79,14 +79,20 @@ group-hover:text-[#b11226]
 
         <div></div>
       </div>
-      <div className=" w-auto  px-5 md:h-24 md:px-0 ">
+      <div className=" flex w-auto items-center justify-end px-5 md:h-24 md:px-0 ">
+        <Link to={"/about"}>
+          <BellRing
+            size="22"
+            className="justify-center hover:text-red-600 lg:hidden"
+          />
+        </Link>
+
         <img
           src={cards}
           alt=""
           className="hidden h-24 w-auto object-contain md:block
     "
         />
-        <BellRing size="22" className="hover:text-red-600 md:hidden" />
       </div>
     </nav>
   );
