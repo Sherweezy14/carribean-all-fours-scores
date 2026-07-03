@@ -20,7 +20,10 @@ export default function NewHome() {
   }, {});
 
   async function getGames() {
-    const { data, error } = await supabase.from("Games").select("*");
+    const { data, error } = await supabase
+      .from("Games")
+      .select("*")
+      .order("start_time", { ascending: false });
     setGames(data ?? []);
     return error ? error : data;
   }
