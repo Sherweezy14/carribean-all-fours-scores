@@ -64,7 +64,7 @@ export default function ScoresCard({ game, teamsById }: ScoreCardProps) {
         </div>
       </div>
       <div className="flex flex-col px-2 pt-8 md:flex-row ">
-        <div className="order-2 flex flex-col pt-1 text-end text-xs md:order-1">
+        <div className="order-2 mr-2 flex flex-col pt-1 text-end text-xs md:order-1">
           <div className=" font-bold md:text-xl">
             {teamsById[game.teamB]?.name}
           </div>

@@ -12,6 +12,7 @@ import { Team } from "../models/Team";
 import { supabase } from "../Supbase-Client";
 import { useState, useEffect } from "react";
 import { Game } from "../models/Game";
+import { useNavigate } from "react-router-dom";
 
 type GameFormProps = {
   initialValues?: Game;
@@ -23,6 +24,7 @@ export default function GameForm({ initialValues }: GameFormProps) {
   const [search2, setSearch2] = useState("");
   const [team1Open, setTeam1Open] = useState(false);
   const [team2Open, setTeam2Open] = useState(false);
+  const navigate = useNavigate();
   const [gameData, setGameData] = useState({
     teamA: initialValues?.teamA || 0,
     teamABullseyes: initialValues?.teamABullseyes || 0,
@@ -92,6 +94,8 @@ export default function GameForm({ initialValues }: GameFormProps) {
         },
       ])
       .select();
+
+    error ? alert(error) : alert("Game has been saved");
   }
 
   function checkForWinner() {
@@ -102,8 +106,8 @@ export default function GameForm({ initialValues }: GameFormProps) {
   async function handleSubmit(e: any) {
     e.preventDefault();
     checkRequiredInputs();
-
-    const res = await save();
+    await save();
+    navigate("/");
   }
 
   useEffect(() => {
