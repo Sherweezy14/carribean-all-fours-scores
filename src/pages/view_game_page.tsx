@@ -68,7 +68,7 @@ export default function ViewGame() {
 
           <div className="text-center">
             <h2 className="font-display text-xl text-[#071b3a] md:text-5xl">
-              {teamsById[game?.team_a_id].name}
+              {teamsById[game?.team_a_id]?.name}
             </h2>
 
             <p className="mt-6 text-3xl font-black text-red-700 md:text-8xl">
@@ -111,7 +111,7 @@ export default function ViewGame() {
               </div>
 
               <p className="mt-2 text-xs font-bold md:text-2xl">
-                {teamsById[game.winner_team_id].name}
+                {teamsById[game.winner_team_id]?.name}
               </p>
             </div>
           </div>
@@ -120,7 +120,7 @@ export default function ViewGame() {
 
           <div className="text-center">
             <h2 className="font-display text-xl text-[#071b3a] md:text-5xl">
-              {teamsById[game.team_b_id].name}
+              {teamsById[game.team_b_id]?.name}
             </h2>
 
             <p className="mt-6 text-2xl font-black text-blue-700 md:text-8xl">

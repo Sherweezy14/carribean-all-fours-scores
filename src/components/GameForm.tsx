@@ -91,13 +91,6 @@ export default function GameForm({ initialValues, formAction }: GameFormProps) {
       winner_team_id: winner,
     };
     formAction(game);
-
-    // const { data, error } = await supabase
-    //   .from("Games")
-    //   .insert([game])
-    //   .select();
-
-    // error ? alert(error) : alert("Game has been saved");
   }
 
   function checkForWinner() {
@@ -114,7 +107,9 @@ export default function GameForm({ initialValues, formAction }: GameFormProps) {
 
   useEffect(() => {
     getTeams();
+  }, []);
 
+  useEffect(() => {
     if (!initialValues || teams.length === 0) {
       return;
     }

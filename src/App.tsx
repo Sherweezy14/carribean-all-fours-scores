@@ -11,6 +11,7 @@ import ViewTeam from "./pages/ViewTeam";
 import DivisionRankings from "./pages/RankingsByDivisionsPage";
 import Rankings from "./pages/RankingsPage";
 import EditGamePage from "./pages/edit_game_page";
+import CreateGamePage from "./pages/Create_game_page";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<NewHome />} />
-          <Route path="/game/new" element={<EditGamePage />} />
+          <Route path="/game/new" element={<CreateGamePage />} />
           <Route path="/game/edit/:id" element={<EditGamePage />} />
           <Route path="/about" element={<About />} />
           <Route path="/schedule" element={<Schedule />} />
