@@ -6,7 +6,8 @@ import { TeamRow } from "../types/TeamRow";
 import { GameRow } from "../types/GameRow";
 import { getTeamsById } from "../util/teamsById";
 import { formatDateHM } from "../util/date";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
 export default function ViewGame() {
   const [game, setGame] = useState<GameRow | null>(null);
   const [teams, setTeams] = useState<TeamRow[]>([]);
@@ -54,6 +55,10 @@ export default function ViewGame() {
           <h1 className="text-center font-display text-5xl text-[#071b3a]">
             Game Details
           </h1>
+          <Link to={`/game/edit/${id}`} className="text-red-500">
+            {" "}
+            Edit{" "}
+          </Link>
         </div>
 
         {/* Scoreboard */}

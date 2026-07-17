@@ -1,5 +1,5 @@
 export type GameRow = {
-  id: number;
+  id?: number;
   team_a_id: number;
   team_b_id: number;
   team_a_bullseyes: number;

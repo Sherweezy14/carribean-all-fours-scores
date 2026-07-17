@@ -11,14 +11,15 @@ import {
 import { Team } from "../models/Team";
 import { supabase } from "../Supbase-Client";
 import { useState, useEffect } from "react";
-import { Game } from "../models/Game";
+import { GameRow } from "../types/GameRow";
 import { useNavigate } from "react-router-dom";
 
 type GameFormProps = {
-  initialValues?: Game;
+  initialValues?: GameRow | null;
+  formAction: (game: GameRow) => void;
 };
 
-export default function GameForm({ initialValues }: GameFormProps) {
+export default function GameForm({ initialValues, formAction }: GameFormProps) {
   const [teams, setTeams] = useState<Team[]>([]);
   const [search1, setSearch1] = useState("");
   const [search2, setSearch2] = useState("");
@@ -26,15 +27,15 @@ export default function GameForm({ initialValues }: GameFormProps) {
   const [team2Open, setTeam2Open] = useState(false);
   const navigate = useNavigate();
   const [gameData, setGameData] = useState({
-    teamA: initialValues?.teamA || 0,
-    teamABullseyes: initialValues?.teamABullseyes || 0,
-    teamAHangJacks: initialValues?.teamAHangJacks || 0,
-    teamBBullseyes: initialValues?.teamBBullseyes || 0,
-    teamBHangJacks: initialValues?.teamBHangJacks || 0,
-    winner: initialValues?.winner || 0,
-    teamB: initialValues?.teamB || 0,
-    start: initialValues?.start || "",
-    end: initialValues?.end || "",
+    teamA: initialValues?.team_a_id || 0,
+    teamABullseyes: initialValues?.team_a_bullseyes || 0,
+    teamAHangJacks: initialValues?.team_a_hangjacks || 0,
+    teamBBullseyes: initialValues?.team_b_bullseyes || 0,
+    teamBHangJacks: initialValues?.team_b_hangjacks || 0,
+    winner: initialValues?.winner_team_id || 0,
+    teamB: initialValues?.team_b_id || 0,
+    start: initialValues?.start_time || "",
+    end: initialValues?.end_time || "",
   });
 
   async function getTeams() {
@@ -78,24 +79,25 @@ export default function GameForm({ initialValues }: GameFormProps) {
   }
   async function save() {
     const winner = checkForWinner();
-    const { data, error } = await supabase
-      .from("Games")
-      .insert([
-        {
-          team_a_id: gameData.teamA,
-          team_b_id: gameData.teamB,
-          team_a_bullseyes: gameData.teamABullseyes,
-          team_a_hangjacks: gameData.teamAHangJacks,
-          team_b_bullseyes: gameData.teamBBullseyes,
-          team_b_hangjacks: gameData.teamBHangJacks,
-          start_time: gameData.start,
-          end_time: gameData.end,
-          winner_team_id: winner,
-        },
-      ])
-      .select();
+    const game = {
+      team_a_id: gameData.teamA,
+      team_b_id: gameData.teamB,
+      team_a_bullseyes: gameData.teamABullseyes,
+      team_a_hangjacks: gameData.teamAHangJacks,
+      team_b_bullseyes: gameData.teamBBullseyes,
+      team_b_hangjacks: gameData.teamBHangJacks,
+      start_time: gameData.start,
+      end_time: gameData.end,
+      winner_team_id: winner,
+    };
+    formAction(game);
 
-    error ? alert(error) : alert("Game has been saved");
+    // const { data, error } = await supabase
+    //   .from("Games")
+    //   .insert([game])
+    //   .select();
+
+    // error ? alert(error) : alert("Game has been saved");
   }
 
   function checkForWinner() {
@@ -112,7 +114,15 @@ export default function GameForm({ initialValues }: GameFormProps) {
 
   useEffect(() => {
     getTeams();
-  }, []);
+
+    if (!initialValues || teams.length === 0) {
+      return;
+    }
+    const teamA = teams.find((team) => team.id === initialValues.team_a_id);
+    const teamB = teams.find((team) => team.id == initialValues.team_b_id);
+    setSearch1(teamA?.name ?? "");
+    setSearch2(teamB?.name ?? "");
+  }, [teams]);
   return (
     <section className="grid grid-cols-1 p-3 md:grid-cols-2">
       <div className="flex flex-row justify-between pl-2 md:col-span-2">
