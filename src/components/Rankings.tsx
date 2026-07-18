@@ -7,7 +7,12 @@ export default function Rankings() {
   const [rankings, setRankings] = useState<RankingsRow[]>([]);
 
   async function getRankings() {
-    const { data } = await supabase.from("rankings").select("*");
+    const { data } = await supabase
+      .from("rankings")
+      .select("*")
+      .order("bullseyes_for", { ascending: false })
+      .order("bullseyes_against", { ascending: true })
+      .order("wins", { ascending: false });
     setRankings(data ?? []);
   }
   useEffect(() => {

@@ -6,4 +6,5 @@ export type RankingsRow = {
   losses: number;
   bullseyes_for: number;
   hangjacks_for: number;
+  bullseyes_against: number;
 };

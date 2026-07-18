@@ -2,20 +2,24 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight, Trophy } from "lucide-react";
 import { supabase } from "../Supbase-Client";
-import { RankingByDivisionRow } from "../types/RankingsByDivisionRow";
-
+import { RankingsRow } from "../types/RankingsRow";
 export default function Rankings() {
-  const [rankings, setRankings] = useState<RankingByDivisionRow[]>([]);
+  const [rankings, setRankings] = useState<RankingsRow[]>([]);
 
   useEffect(() => {
     getRankings();
+    {
+      console.log(rankings);
+    }
   }, []);
 
   async function getRankings() {
     const { data, error } = await supabase
-      .from("team_standings_by_division")
-      .select("*");
-
+      .from("rankings")
+      .select("*")
+      .order("bullseyes_for", { ascending: false })
+      .order("bullseyes_against", { ascending: true })
+      .order("wins", { ascending: false });
     return error ? error : setRankings(data);
   }
 
@@ -37,33 +41,34 @@ export default function Rankings() {
 
         <div className="grid grid-cols-12 bg-slate-50 px-4 py-3 text-xs font-bold uppercase tracking-wide text-slate-500">
           <div className="col-span-1">#</div>
-          <div className="col-span-4">Team</div>
+          <div className="col-span-3">Team</div>
           <div className="col-span-2">Div</div>
           <div className="col-span-1 text-center">GP</div>
           <div className="col-span-1 text-center">W</div>
           <div className="col-span-1 text-center">L</div>
-          <div className="col-span-1 text-center">BE</div>
+          <div className="col-span-1 text-center">BF</div>
+          <div className="col-span-1 text-center">BA</div>
           <div className="col-span-1 text-center">HJ</div>
         </div>
 
         <div className="divide-y divide-slate-100">
           {rankings.map((team, index) => (
             <Link
-              key={team.team_id}
-              to={`/teams/${team.team_id}`}
+              key={team.id}
+              to={`/teams/${team.id}`}
               className="grid grid-cols-12 items-center px-4 py-4 text-sm transition hover:bg-slate-50"
             >
               <div className="col-span-1 font-bold text-slate-500">
                 {index + 1}
               </div>
 
-              <div className="col-span-4 font-bold text-[#071b3a]">
-                {team.team_name}
+              <div className="col-span-3 font-bold text-[#071b3a]">
+                {team.name}
               </div>
 
               <div className="col-span-2 text-center md:text-left">
                 <span className="rounded-full bg-blue-50  text-xs font-semibold text-blue-700 md:px-3 md:py-1">
-                  {team.division_name}
+                  {/*team.division_name*/}
                 </span>
               </div>
 
@@ -78,6 +83,9 @@ export default function Rankings() {
               </div>
 
               <div className="col-span-1 text-center">{team.bullseyes_for}</div>
+              <div className="col-span-1 text-center">
+                {team.bullseyes_against}
+              </div>
 
               <div className="col-span-1 flex items-center justify-between text-center">
                 <p></p>
