@@ -68,7 +68,7 @@ export default function Rankings() {
 
               <div className="col-span-2 text-center md:text-left">
                 <span className="rounded-full bg-blue-50  text-xs font-semibold text-blue-700 md:px-3 md:py-1">
-                  {/*team.division_name*/}
+                  {team.division_name}
                 </span>
               </div>
 

@@ -7,4 +7,5 @@ export type RankingsRow = {
   bullseyes_for: number;
   hangjacks_for: number;
   bullseyes_against: number;
+  division_name: string;
 };
