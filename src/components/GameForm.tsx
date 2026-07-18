@@ -94,9 +94,12 @@ export default function GameForm({ initialValues, formAction }: GameFormProps) {
   }
 
   function checkForWinner() {
-    return gameData.teamABullseyes > gameData.teamBBullseyes
-      ? gameData.teamA
-      : gameData.teamB;
+    if (gameData.end !== "") {
+      return gameData.teamABullseyes > gameData.teamBBullseyes
+        ? gameData.teamA
+        : gameData.teamB;
+    }
+    return 0;
   }
   async function handleSubmit(e: any) {
     e.preventDefault();

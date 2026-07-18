@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 export default function NewHome() {
   const [games, setGames] = useState<GameRow[]>([]);
   const [teams, setTeams] = useState<TeamRow[]>([]);
+  const now = new Date();
   const teamsById = teams.reduce<Record<number, Team>>((acc, team) => {
     acc[team.id] = teamRowtoTeamMapper(team);
     return acc;
@@ -63,15 +64,16 @@ export default function NewHome() {
         </div>
 
         {/* Card Component*/}
-        {games.map((game, index) => (
-          <Link to={`/game/${game.id}`}>
-            <ScoresCard
-              key={game.id}
-              game={mapGameRowToGame(game)}
-              teamsById={teamsById}
-            />
-          </Link>
-        ))}
+        {games
+          .filter((game) => {
+            const start = new Date(game.start_time);
+            return start <= now;
+          })
+          .map((game) => (
+            <Link key={game.id} to={`/game/${game.id}`}>
+              <ScoresCard game={mapGameRowToGame(game)} teamsById={teamsById} />
+            </Link>
+          ))}
       </div>
 
       <div className="col-span-1 rounded-md bg-white p-2">
