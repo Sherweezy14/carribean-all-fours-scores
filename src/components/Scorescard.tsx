@@ -36,7 +36,7 @@ export default function ScoresCard({ game, teamsById }: ScoreCardProps) {
           </div>
           <div>
             <span className="hidden md:block">Bullseys:</span>{" "}
-            <span className=" md:hidden">BE:</span> {game.teamAHangJacks}{" "}
+            <span className=" md:hidden">HJ:</span> {game.teamAHangJacks}{" "}
           </div>
         </div>
       </div>
