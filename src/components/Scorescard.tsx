@@ -26,9 +26,7 @@ export default function ScoresCard({ game, teamsById }: ScoreCardProps) {
           </div>
         </div>
         <div className="flex flex-col pt-1 text-xs">
-          <div className="mb-3 hidden  font-semibold text-red-500 md:block">
-            Division A
-          </div>
+          <div className="mb-3 hidden  font-semibold text-red-500 md:block"></div>
           <div className="text-md font-bold md:text-xl">
             {teamsById[game.teamA]?.name}
           </div>
@@ -44,10 +42,7 @@ export default function ScoresCard({ game, teamsById }: ScoreCardProps) {
       </div>
       <div className="flex flex-col items-center justify-center text-center">
         <div className="text-xs">
-          <span className="block font-semibold text-red-500 md:hidden">
-            {" "}
-            Division A
-          </span>
+          <span className="block font-semibold text-red-500 md:hidden"> </span>
           <span className="block md:inline">
             {" "}
             Started <br />

@@ -52,11 +52,13 @@ export default function NewHome() {
           </div>
 
           <div className="pt-2">
-            <Link to={"/game/new"}>
+            {/*
+          <Link to={"/game/new"}>
               <p className="items-center justify-center rounded-md bg-red-900 px-3 py-1 font-display text-sm text-white">
                 Add Game
               </p>
             </Link>
+          */}
           </div>
         </div>
 

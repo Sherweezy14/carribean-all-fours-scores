@@ -22,7 +22,7 @@ export default function Rankings() {
             <span className="mr-2 font-display text-2xl text-blue-950">
               Top Rankings
             </span>
-            <span className="text-red-500"> Division A</span>
+            <span className="text-red-500"> </span>
           </div>
           <div className="overflow-hidden rounded-lg border-2 border-gray-100 text-center text-sm shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-xl lg:text-xl">
             <table className="w-full">

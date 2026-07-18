@@ -16,6 +16,13 @@ export default function ViewGame() {
   const teamsById = getTeamsById(teams);
   const navigate = useNavigate();
 
+  async function deleteGame() {
+    const { data, error } = await supabase.from("Games").delete().eq("id", id);
+
+    error ? alert(error) : alert("game deleted");
+    navigate("/");
+  }
+
   useEffect(() => {
     async function getGame() {
       const { data, error } = await supabase
@@ -25,7 +32,6 @@ export default function ViewGame() {
         .single();
       return error ? error : setGame(data);
     }
-
     async function getTeams() {
       const { data, error } = await supabase.from("Teams").select("*");
       return error ? error : setTeams(data);
@@ -33,6 +39,7 @@ export default function ViewGame() {
     getGame();
     getTeams();
   }, []);
+
   if (!game || teams.length === 0) {
     return <> loading</>;
   }
@@ -55,10 +62,6 @@ export default function ViewGame() {
           <h1 className="text-center font-display text-5xl text-[#071b3a]">
             Game Details
           </h1>
-          <Link to={`/game/edit/${id}`} className="text-red-500">
-            {" "}
-            Edit{" "}
-          </Link>
         </div>
 
         {/* Scoreboard */}
