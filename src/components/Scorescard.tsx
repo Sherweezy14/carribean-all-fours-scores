@@ -19,7 +19,7 @@ export default function ScoresCard({ game, teamsById }: ScoreCardProps) {
       <div className="flex flex-col px-2 py-1 md:flex-row ">
         <div className="flex flex-col  pr-2 text-white">
           <div className="mb-2 w-fit rounded-md bg-red-500 px-1 py-1 text-xs font-bold md:text-sm">
-            Live Now
+            {game.end ? "Completed" : "Live Now"}
           </div>
           <div className="w-fit rounded-full bg-red-900 px-3 py-3">
             <Users size={24} strokeWidth={3} />
