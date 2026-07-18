@@ -72,8 +72,9 @@ export default function ViewTeam() {
           <div>
             <p className="text-sm text-slate-500">Wins</p>
             <p className="text-2xl font-bold">
-              {teamGames.filter((game) => game.winner_team_id === team.id)
-                .length | 0}
+              {teamGames.filter(
+                (game) => game.winner_team_id == team.id && game.end_time,
+              ).length | 0}
             </p>
           </div>
 
@@ -81,7 +82,8 @@ export default function ViewTeam() {
             <p className="text-sm text-slate-500">Losses</p>
             <p className="text-2xl font-bold">
               {teamGames.filter(
-                (game: GameRow) => game.winner_team_id !== team.id,
+                (game: GameRow) =>
+                  game.winner_team_id !== team.id && game.end_time,
               ).length | 0}
             </p>
           </div>
@@ -116,15 +118,17 @@ export default function ViewTeam() {
                 className="grid grid-cols-12 items-center gap-3 px-5 py-4 text-sm transition hover:bg-slate-50"
               >
                 <div className="col-span-2">
-                  <span
-                    className={`rounded-full px-1 py-1 text-xs font-bold md:px-3 md:py-1 ${
-                      result === "Win"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-red-100 text-red-700"
-                    }`}
-                  >
-                    {result}
-                  </span>
+                  {game.end_time && (
+                    <span
+                      className={`rounded-full px-1 py-1 text-xs font-bold md:px-3 md:py-1 ${
+                        result === "Win"
+                          ? "bg-green-100 text-green-700"
+                          : "bg-red-100 text-red-700"
+                      }`}
+                    >
+                      {result}
+                    </span>
+                  )}
                 </div>
 
                 <div className="col-span-4 font-bold text-[#071b3a]">
