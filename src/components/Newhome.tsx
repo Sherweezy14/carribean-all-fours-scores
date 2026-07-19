@@ -46,7 +46,7 @@ export default function NewHome() {
 
   return (
     <section className="grid grid-flow-row-dense grid-cols-1 gap-2 px-5 py-5 lg:grid-cols-3 ">
-      <div className=" col-span-1 flex flex-col gap-2 rounded-md bg-white px-2 pl-2 md:col-span-2 ">
+      <div className=" col-span-1 flex flex-col gap-2 rounded-md bg-white px-2 pl-2 pt-4 md:col-span-2 ">
         <PlayoffView />
         <div className="flex justify-between pb-5">
           <div className="flex md:flex-col">
