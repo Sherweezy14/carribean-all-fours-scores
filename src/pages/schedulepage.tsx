@@ -55,9 +55,9 @@ export default function Schedule() {
               </div>
 
               <div className="col-span-3 flex flex-col items-center text-center font-bold text-[#071b3a] md:flex-row lg:col-span-4 ">
-                {teamsById[game.team_a_id].name}
+                {teamsById[game.team_a_id]?.name}
                 <span className="mx-2 text-slate-400">vs</span>
-                {teamsById[game.team_b_id].name}
+                {teamsById[game.team_b_id]?.name}
               </div>
 
               <div className="col-span-3 text-center text-slate-600 lg:col-span-2">
