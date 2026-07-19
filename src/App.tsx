@@ -15,6 +15,7 @@ import CreateGamePage from "./pages/Create_game_page";
 import { AuthProvider } from "./util/AuthProvider";
 import Signup from "./pages/SignUp";
 import Login from "./pages/LoginPage";
+import Playoffs from "./pages/Playoff";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="game/:id" element={<ViewGame />} />
           <Route path="/teams" element={<ViewTeams />} />
           <Route path="/teams/:id" element={<ViewTeam />} />
+          <Route path="/playoffs" element={<Playoffs />} />
         </Route>
         <Route path="/clarenceadmin" element={<Signup />} />
         <Route path="/login" element={<Login />} />
