@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 export default function QuickNav() {
   const links = [
     { name: "HOME", icon: Radio, route: "/" },
+    { name: "PLAYOFFS", icon: Layers, route: "/playoffs" },
     { name: "SCHEDULE", icon: Calendar, route: "/schedule" },
     { name: "RANKINGS", icon: Trophy, route: "/rankings" },
     { name: "TEAMS", icon: Users, route: "/teams" },
-    { name: "DIVISIONS", icon: Layers, route: "/divisions" },
   ];
 
   return (
