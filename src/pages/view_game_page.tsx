@@ -7,11 +7,15 @@ import { GameRow } from "../types/GameRow";
 import { getTeamsById } from "../util/teamsById";
 import { formatDateHM } from "../util/date";
 import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../util/AuthProvider";
+import LogoutButton from "../components/LogOutButton";
 
 export default function ViewGame() {
   const [game, setGame] = useState<GameRow | null>(null);
   const [teams, setTeams] = useState<TeamRow[]>([]);
   const { id } = useParams();
+  const user = useAuth();
+  console.log(user);
   const gameId = id;
   const teamsById = getTeamsById(teams);
   const navigate = useNavigate();
@@ -62,6 +66,15 @@ export default function ViewGame() {
           <h1 className="text-center font-display text-5xl text-[#071b3a]">
             Game Details
           </h1>
+          {user.session && (
+            <>
+              <Link to={`/game/edit/${id}`}>
+                <p className="w-14 items-center justify-center rounded-md bg-red-900 px-3 py-1 font-display text-sm text-white">
+                  Edit
+                </p>
+              </Link>
+            </>
+          )}
         </div>
 
         {/* Scoreboard */}

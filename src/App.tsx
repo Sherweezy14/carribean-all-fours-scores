@@ -12,6 +12,9 @@ import DivisionRankings from "./pages/RankingsByDivisionsPage";
 import Rankings from "./pages/RankingsPage";
 import EditGamePage from "./pages/edit_game_page";
 import CreateGamePage from "./pages/Create_game_page";
+import { AuthProvider } from "./util/AuthProvider";
+import Signup from "./pages/SignUp";
+import Login from "./pages/LoginPage";
 
 function App() {
   return (
@@ -29,6 +32,8 @@ function App() {
           <Route path="/teams" element={<ViewTeams />} />
           <Route path="/teams/:id" element={<ViewTeam />} />
         </Route>
+        <Route path="/clarenceadmin" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </div>
   );

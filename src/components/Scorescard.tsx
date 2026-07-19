@@ -49,10 +49,12 @@ export default function ScoresCard({ game, teamsById }: ScoreCardProps) {
           </span>{" "}
           {formatDateMDHM(game.start)}
         </div>
-        <div className=" font-display text-4xl md:text-7xl ">
-          {game.winner === game.teamA ? "W" : "L"}-
-          {game.winner === game.teamB ? "W" : "L"}
-        </div>
+        {game.end && (
+          <div className=" font-display text-4xl md:text-7xl ">
+            {game.winner === game.teamA ? "W" : "L"}-
+            {game.winner === game.teamB ? "W" : "L"}
+          </div>
+        )}
         <div className="md:text-md font-sm flex items-center justify-center gap-1 text-sm">
           {" "}
           <Clock size={12} className="" /> 00:45:32

@@ -10,10 +10,13 @@ import { TeamRow } from "../types/TeamRow";
 import { Team } from "../models/Team";
 import { teamRowtoTeamMapper } from "../mappers/TeamMapper";
 import { Link } from "react-router-dom";
+import { useAuth } from "../util/AuthProvider";
 
 export default function NewHome() {
   const [games, setGames] = useState<GameRow[]>([]);
   const [teams, setTeams] = useState<TeamRow[]>([]);
+  const user = useAuth();
+
   const now = new Date();
   const teamsById = teams.reduce<Record<number, Team>>((acc, team) => {
     acc[team.id] = teamRowtoTeamMapper(team);
@@ -53,13 +56,13 @@ export default function NewHome() {
           </div>
 
           <div className="pt-2">
-            {/*
-          <Link to={"/game/new"}>
-              <p className="items-center justify-center rounded-md bg-red-900 px-3 py-1 font-display text-sm text-white">
-                Add Game
-              </p>
-            </Link>
-          */}
+            {user.session && (
+              <Link to={"/game/new"}>
+                <p className="items-center justify-center rounded-md bg-red-900 px-3 py-1 font-display text-sm text-white">
+                  Add Game
+                </p>
+              </Link>
+            )}
           </div>
         </div>
 
