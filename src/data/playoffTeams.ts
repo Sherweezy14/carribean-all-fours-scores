@@ -3,42 +3,42 @@ import { PlayoffTeam } from "../types/Playoff";
 export const rankedTeams: PlayoffTeam[] = [
   {
     id: 1,
-    name: "Boston Ballers",
+    name: "SACOSA",
     seed: 1,
   },
   {
     id: 2,
-    name: "Unity Sports Club",
+    name: "ORIGINAL EAGLES",
     seed: 2,
   },
   {
     id: 3,
-    name: "Red Devils",
+    name: "JB GAMBLERS",
     seed: 3,
   },
   {
     id: 4,
-    name: "Warriors",
+    name: "JAGUARS",
     seed: 4,
   },
   {
     id: 5,
-    name: "Islanders",
+    name: "TBD",
     seed: 5,
   },
   {
     id: 6,
-    name: "Trinis",
+    name: "TBD",
     seed: 6,
   },
   {
     id: 7,
-    name: "Panthers",
+    name: "TBD",
     seed: 7,
   },
   {
     id: 8,
-    name: "Kings",
+    name: "TBD",
     seed: 8,
   },
 ];

@@ -19,7 +19,7 @@ export default function Navbar() {
     { name: "rankings", link: "/rankings", icon: Trophy },
     { name: "teams", link: "/teams", icon: Users },
     { name: "divisions", link: "/divisions", icon: Layers },
-    { name: "about", link: "/about", icon: ShieldAlert },
+    { name: "playoffs", link: "/playoffs", icon: ShieldAlert },
   ];
 
   return (

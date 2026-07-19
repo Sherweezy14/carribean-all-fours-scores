@@ -1,13 +1,21 @@
-import type { PlayoffMatch, PlayoffTeam } from "../types/Playoff";
-
 import MatchCard from "./MatchCard";
+
+import type { DatabasePlayoffGame } from "../types/Playoff";
 
 interface RoundColumnProps {
   title: string;
   subtitle: string;
-  matches: PlayoffMatch[];
+  matches: DatabasePlayoffGame[];
   className?: string;
-  onSelectWinner: (matchId: string, team: PlayoffTeam) => void;
+
+  savingGameId: number | null;
+
+  onSaveResult: (
+    match: DatabasePlayoffGame,
+    winningTeamId: number,
+    teamAScore: number,
+    teamBScore: number,
+  ) => Promise<void>;
 }
 
 export default function RoundColumn({
@@ -15,7 +23,8 @@ export default function RoundColumn({
   subtitle,
   matches,
   className = "",
-  onSelectWinner,
+  savingGameId,
+  onSaveResult,
 }: RoundColumnProps) {
   return (
     <section className={className}>
@@ -30,7 +39,10 @@ export default function RoundColumn({
           <MatchCard
             key={match.id}
             match={match}
-            onSelectWinner={onSelectWinner}
+            saving={savingGameId === match.id}
+            onSaveResult={(winningTeamId, teamAScore, teamBScore) =>
+              onSaveResult(match, winningTeamId, teamAScore, teamBScore)
+            }
           />
         ))}
       </div>

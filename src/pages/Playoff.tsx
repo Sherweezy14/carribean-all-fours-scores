@@ -1,22 +1,39 @@
-import { useMemo, useState } from "react";
-import { RotateCcw, Trophy } from "lucide-react";
-
-import ChampionCard from "../components/ChampionCard";
+import { useEffect, useMemo, useState } from "react";
+import { Trophy } from "lucide-react";
+import PlayoffSetup from "../components/PlayoffSetup";
 import RoundColumn from "../components/RoundColumn";
-import { rankedTeams } from "../data/playoffTeams";
-import type { PlayoffMatch, PlayoffRound, PlayoffTeam } from "../types/Playoff";
-import { createPlayoffBracket } from "../util/createPlayoffBracket";
+import { completePlayoffGame, getPlayoffGames } from "../util/playoffServices";
 
-function getMatchesByRound(matches: PlayoffMatch[], round: PlayoffRound) {
+import type {
+  DatabasePlayoffGame,
+  NextMatchSlot,
+  PlayoffRound,
+} from "../types/Playoff";
+
+function getMatchesByRound(
+  matches: DatabasePlayoffGame[],
+  round: PlayoffRound,
+) {
   return matches
-    .filter((match) => match.round === round)
-    .sort((a, b) => a.bracketPosition - b.bracketPosition);
+    .filter((match) => match.playoff_round === round)
+    .sort(
+      (firstMatch, secondMatch) =>
+        firstMatch.bracket_position - secondMatch.bracket_position,
+    );
 }
 
 export default function Playoffs() {
-  const [matches, setMatches] = useState<PlayoffMatch[]>(() =>
-    createPlayoffBracket(rankedTeams),
-  );
+  const [matches, setMatches] = useState<DatabasePlayoffGame[]>([]);
+
+  const [loading, setLoading] = useState(true);
+
+  const [savingGameId, setSavingGameId] = useState<number | null>(null);
+
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    void loadPlayoffs();
+  }, []);
 
   const quarterfinals = useMemo(
     () => getMatchesByRound(matches, "quarterfinal"),
@@ -33,158 +50,179 @@ export default function Playoffs() {
     [matches],
   );
 
-  const championshipMatch = championship[0];
+  const championshipGame = championship[0];
 
-  const champion =
-    championshipMatch?.winnerId != null
-      ? championshipMatch.teamA?.id === championshipMatch.winnerId
-        ? championshipMatch.teamA
-        : championshipMatch.teamB
-      : null;
+  const championTeamId = championshipGame?.winner_team_id ?? null;
 
-  function handleSelectWinner(matchId: string, winningTeam: PlayoffTeam) {
-    setMatches((currentMatches) => {
-      const selectedMatch = currentMatches.find(
-        (match) => match.id === matchId,
-      );
-
-      if (!selectedMatch) {
-        return currentMatches;
+  async function loadPlayoffs(showFullLoader = true) {
+    try {
+      if (showFullLoader) {
+        setLoading(true);
       }
 
-      const updatedMatches = currentMatches.map((match) => {
-        if (match.id !== matchId) {
-          return match;
-        }
+      setErrorMessage("");
 
-        const teamAWon = match.teamA?.id === winningTeam.id;
+      const games = await getPlayoffGames();
 
-        return {
-          ...match,
-          winnerId: winningTeam.id,
-          status: "final" as const,
-          teamAScore: teamAWon ? 21 : 14,
-          teamBScore: teamAWon ? 14 : 21,
-        };
-      });
+      setMatches(games);
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Unable to load playoffs.";
 
-      if (!selectedMatch.nextMatchId || !selectedMatch.nextMatchSlot) {
-        return updatedMatches;
+      setErrorMessage(message);
+    } finally {
+      if (showFullLoader) {
+        setLoading(false);
       }
-      const nextMatchId = selectedMatch.nextMatchId;
-      const nextMatchSlot = selectedMatch.nextMatchSlot;
-      return updatedMatches.map((match) => {
-        if (match.id !== nextMatchId) {
-          return match;
-        }
-
-        return {
-          ...match,
-          [nextMatchSlot]: winningTeam,
-        };
-      });
-    });
+    }
   }
 
-  function resetBracket() {
-    setMatches(createPlayoffBracket(rankedTeams));
+  async function handleSelectWinner(
+    match: DatabasePlayoffGame,
+    winningTeamId: number,
+    teamAScore: number,
+    teamBScore: number,
+  ) {
+    try {
+      setSavingGameId(match.id);
+      setErrorMessage("");
+
+      await completePlayoffGame({
+        gameId: match.id,
+        winnerTeamId: winningTeamId,
+        teamAScore,
+        teamBScore,
+        nextGameId: match.next_game_id,
+        nextGameSlot: match.next_game_slot as NextMatchSlot | null,
+      });
+
+      // Reload the bracket without replacing
+      // the entire screen with the loading message.
+      await loadPlayoffs(false);
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Unable to save the result.";
+
+      setErrorMessage(message);
+    } finally {
+      setSavingGameId(null);
+    }
+  }
+
+  if (loading) {
+    return (
+      <main className="flex min-h-80 items-center justify-center">
+        <p className="text-sm font-medium text-slate-500">
+          Loading playoffs...
+        </p>
+      </main>
+    );
   }
 
   return (
     <main className="min-h-screen bg-slate-100 px-4 py-6 md:px-6 lg:px-8">
       <div className="mx-auto max-w-[1500px]">
-        <header className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-start gap-3">
-            <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-red-700 text-white">
-              <Trophy size={25} />
-            </div>
-
-            <div>
-              <h1 className="text-2xl font-black text-slate-900 md:text-3xl">
-                Playoffs
-              </h1>
-
-              <p className="mt-1 text-sm text-slate-500">
-                8 teams · Single elimination
-              </p>
-            </div>
+        <header className="mb-6 flex items-center gap-3">
+          <div className="flex size-12 items-center justify-center rounded-xl bg-red-700 text-white">
+            <Trophy size={24} />
           </div>
 
-          <button
-            type="button"
-            onClick={resetBracket}
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-red-700 px-5 py-3 text-sm font-bold text-white transition hover:bg-red-800"
-          >
-            <RotateCcw size={17} />
-            Reset Playoffs
-          </button>
+          <div>
+            <h1 className="text-2xl font-black text-slate-900 md:text-3xl">
+              Playoffs
+            </h1>
+
+            <p className="text-sm text-slate-500">
+              Eight-team single elimination tournament
+            </p>
+          </div>
         </header>
 
-        <div className="mb-6 rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-900">
-          Select a team inside a matchup to declare it the winner. The team will
-          automatically advance to the next round.
-        </div>
+        {errorMessage && (
+          <p className="mb-5 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+            {errorMessage}
+          </p>
+        )}
 
-        {/* Laptop and tablet */}
-        <div className="hidden gap-6 md:grid md:grid-cols-3 xl:grid-cols-[1.1fr_1fr_0.9fr_0.7fr]">
-          <RoundColumn
-            title="Quarterfinals"
-            subtitle="Best of 1"
-            matches={quarterfinals}
-            onSelectWinner={handleSelectWinner}
+        {matches.length === 0 ? (
+          <PlayoffSetup
+            onBracketCreated={async () => {
+              await loadPlayoffs(false);
+            }}
           />
+        ) : (
+          <>
+            {/* Desktop and tablet layout */}
+            <div className="hidden gap-6 md:grid md:grid-cols-3">
+              <RoundColumn
+                title="Quarterfinals"
+                subtitle="Round of 8"
+                matches={quarterfinals}
+                savingGameId={savingGameId}
+                onSaveResult={handleSelectWinner}
+              />
 
-          <RoundColumn
-            title="Semifinals"
-            subtitle="Best of 1"
-            matches={semifinals}
-            onSelectWinner={handleSelectWinner}
-            className="md:pt-24 xl:pt-28"
-          />
+              <RoundColumn
+                title="Semifinals"
+                subtitle="Final four"
+                matches={semifinals}
+                savingGameId={savingGameId}
+                onSaveResult={handleSelectWinner}
+                className="pt-24"
+              />
 
-          <RoundColumn
-            title="Championship"
-            subtitle="Best of 1"
-            matches={championship}
-            onSelectWinner={handleSelectWinner}
-            className="md:pt-40 xl:pt-48"
-          />
+              <RoundColumn
+                title="Championship"
+                subtitle="Tournament final"
+                matches={championship}
+                savingGameId={savingGameId}
+                onSaveResult={handleSelectWinner}
+                className="pt-40"
+              />
+            </div>
 
-          <div className="hidden pt-32 xl:block">
-            <ChampionCard champion={champion} />
-          </div>
-        </div>
+            {/* Mobile layout */}
+            <div className="space-y-8 md:hidden">
+              <RoundColumn
+                title="Quarterfinals"
+                subtitle="Round of 8"
+                matches={quarterfinals}
+                savingGameId={savingGameId}
+                onSaveResult={handleSelectWinner}
+              />
 
-        {/* Mobile */}
-        <div className="space-y-8 md:hidden">
-          <RoundColumn
-            title="Quarterfinals"
-            subtitle="Best of 1"
-            matches={quarterfinals}
-            onSelectWinner={handleSelectWinner}
-          />
+              <RoundColumn
+                title="Semifinals"
+                subtitle="Final four"
+                matches={semifinals}
+                savingGameId={savingGameId}
+                onSaveResult={handleSelectWinner}
+              />
 
-          <RoundColumn
-            title="Semifinals"
-            subtitle="Best of 1"
-            matches={semifinals}
-            onSelectWinner={handleSelectWinner}
-          />
+              <RoundColumn
+                title="Championship"
+                subtitle="Tournament final"
+                matches={championship}
+                savingGameId={savingGameId}
+                onSaveResult={handleSelectWinner}
+              />
+            </div>
 
-          <RoundColumn
-            title="Championship"
-            subtitle="Best of 1"
-            matches={championship}
-            onSelectWinner={handleSelectWinner}
-          />
+            {championTeamId !== null && (
+              <section className="mt-8 rounded-2xl border border-amber-200 bg-amber-50 p-6 text-center">
+                <Trophy size={44} className="mx-auto text-amber-600" />
 
-          <ChampionCard champion={champion} />
-        </div>
+                <p className="mt-3 text-sm font-bold uppercase tracking-widest text-amber-700">
+                  Tournament Champion
+                </p>
 
-        {/* Tablet champion display */}
-        <div className="mt-8 hidden md:block xl:hidden">
-          <ChampionCard champion={champion} />
-        </div>
+                <p className="mt-2 text-xl font-black text-slate-900">
+                  Team ID: {championTeamId}
+                </p>
+              </section>
+            )}
+          </>
+        )}
       </div>
     </main>
   );

@@ -36,6 +36,7 @@ export default function GameForm({ initialValues, formAction }: GameFormProps) {
     teamB: initialValues?.team_b_id || 0,
     start: initialValues?.start_time || "",
     end: initialValues?.end_time || "",
+    round: initialValues?.round || "",
   });
 
   async function getTeams() {
@@ -89,6 +90,7 @@ export default function GameForm({ initialValues, formAction }: GameFormProps) {
       start_time: gameData.start,
       end_time: gameData.end,
       winner_team_id: winner,
+      round: gameData.round,
     };
     formAction(game);
   }
@@ -145,6 +147,19 @@ export default function GameForm({ initialValues, formAction }: GameFormProps) {
         </div>
       </div>
       <form className="col-span-1 md:col-span-2" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          className="my-3 w-1/4"
+          name="round"
+          value={gameData.round}
+          placeholder="Round"
+          onChange={(e) => {
+            setGameData((prev) => ({
+              ...prev,
+              round: e.target.value,
+            }));
+          }}
+        />
         <div className="col-span-2 flex flex-grow flex-col gap-6 md:flex-row">
           <div className="flex flex-grow flex-col rounded-lg border-2 border-gray-100 p-2">
             <div className="mb-2 flex items-center text-green-700">
